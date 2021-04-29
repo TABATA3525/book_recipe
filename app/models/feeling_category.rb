@@ -1,0 +1,2 @@
+class FeelingCategory < ApplicationRecord
+end
