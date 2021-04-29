@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_book: one
+  feeling_category_id: 1
+  stars: 1
+
+two:
+  user_book: two
+  feeling_category_id: 1
+  stars: 1
