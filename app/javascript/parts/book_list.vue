@@ -1,10 +1,11 @@
 <template>
   <div>
-    <input class='input bg-white mb16' type='search' id='$q' />
+    <input v-model="search" class='input bg-white mb16' type='search' @input="changeBooks" />
       
     <div>
       <h2 class='mb8'>検索結果</h2>
-      <div id='$results' v-model="results"></div>
+      <div id='$results' v-html="results">
+      </div>
     </div>
   </div>
 </template>
@@ -17,26 +18,12 @@ export default {
   },
   data: function () {
     return {
-      results: ''
+      results: '',
+      search: ''
     }
   },
   async mounted() {
-    var value = '鬼滅';
-    var items = await this.searchBooks(value);
-    console.log(items)
     
-    // html に変換して表示用 DOM に代入
-    var texts = items.map(item => {
-      return `
-      <a class='f border bg-white mb8' href='${item.link}', target='_blank'>
-        <img class='w100 object-fit-contain bg-gray' src='${item.image}' />
-        <div class='p16'>
-          <h3 class='mb8'>${item.title}</h3>
-          <p class='line-clamp-2'>${item.description}</p>
-        </div>
-      </div>`;
-    });
-    this.results = texts.join('');
   },
   methods: {
     searchBooks: async function(query) {
@@ -59,6 +46,30 @@ export default {
       });
       
       return items;
+    },
+    changeBooks: async function(){
+      var value = this.search;
+      if (value == ''){
+        this.results = ''
+        return
+      }
+      var items = await this.searchBooks(value);
+      console.log(value)
+      
+      // html に変換して表示用 DOM に代入
+      var texts = items.map(item => {
+        return `
+        <a class='f border bg-white mb8' href='${item.link}', target='_blank'>
+          <img class='w100 object-fit-contain bg-gray' src='${item.image}' />
+          <div class='p16'>
+            <h3 class='mb8'>${item.title}</h3>
+            <p class='line-clamp-2'>${item.description}</p>
+          </div>
+          <input type="submit" value="登録する">
+        </div>`;
+      });
+      this.results = texts.join('');
+        
     }
   }
 }
