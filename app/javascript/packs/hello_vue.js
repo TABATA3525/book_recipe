@@ -7,14 +7,18 @@
 
 import Vue from 'vue'
 import App from '../parts/book_list.vue'
+import axios from 'axios';
+
+Vue.prototype.$http = axios.create(
+  { baseURL: process.env.VUE_APP_API_URI, withCredentials: true },
+);
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     render: h => h(App)
   }).$mount()
-  document.body.appendChild(app.$el)
-
-  console.log(app)
+  var element = document.getElementById('bookForm');
+  element.append(app.$el)
 })
 
 
