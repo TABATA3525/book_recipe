@@ -4,7 +4,17 @@
       
     <div>
       <h2 class='mb8'>検索結果</h2>
-      <div id='$results' v-html="results">
+      <div id='$results' v-for="result in results">
+        <a class='f border bg-white mb8' :href="result.link" target='_blank'>
+          {{ result.title }}
+        </a>
+        <input type='hidden' :value="result.title" name="title">
+        <img class='w100 object-fit-contain bg-gray' :src="result.image">
+        <div v-for="author in result.authors">
+          {{ author }}
+        </div>
+        <input type="hidden" :value="result.authors" name="author">
+        <button type="button" @click="createBook">登録する</button>
       </div>
     </div>
   </div>
@@ -13,17 +23,14 @@
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
   data: function () {
     return {
-      results: '',
-      search: ''
+      results: [],
+      search: '',
     }
   },
   async mounted() {
-    
+    console.log(123)
   },
   methods: {
     searchBooks: async function(query) {
@@ -39,6 +46,7 @@ export default {
         var vi = item.volumeInfo;
         return {
           title: vi.title,
+          authors: vi.authors,
           description: vi.description,
           link: vi.infoLink,
           image: vi.imageLinks ? vi.imageLinks.smallThumbnail : '',
@@ -54,22 +62,17 @@ export default {
         return
       }
       var items = await this.searchBooks(value);
-      console.log(value)
+      console.log(items)
       
-      // html に変換して表示用 DOM に代入
-      var texts = items.map(item => {
-        return `
-        <a class='f border bg-white mb8' href='${item.link}', target='_blank'>
-          <img class='w100 object-fit-contain bg-gray' src='${item.image}' />
-          <div class='p16'>
-            <h3 class='mb8'>${item.title}</h3>
-            <p class='line-clamp-2'>${item.description}</p>
-          </div>
-          <input type="submit" value="登録する">
-        </div>`;
-      });
-      this.results = texts.join('');
-        
+      this.results = items;  
+    },
+    createBook: function(){
+      this.$http
+        .post('/user_books', {
+          title: '鬼滅',
+          author: '',
+          image: ''
+        })
     }
   }
 }
