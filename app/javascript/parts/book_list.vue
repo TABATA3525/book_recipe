@@ -4,17 +4,17 @@
       
     <div>
       <h2 class='mb8'>検索結果</h2>
-      <div id='$results' v-for="result in results">
+      <div id='$results' v-for="(result, index) in results">
         <a class='f border bg-white mb8' :href="result.link" target='_blank'>
           {{ result.title }}
         </a>
-        <input type='hidden' :value="result.title" name="title">
+        <input :id="'title' + index" type='hidden' :value="result.title" name="title">
         <img class='w100 object-fit-contain bg-gray' :src="result.image">
         <div v-for="author in result.authors">
           {{ author }}
         </div>
-        <input type="hidden" :value="result.authors" name="author">
-        <button type="button" @click="createBook">登録する</button>
+        <input :id="'author' + index" type="hidden" :value="result.authors" name="author">
+        <button type="button" @click="createBook(index)">登録する</button>
       </div>
     </div>
   </div>
@@ -66,11 +66,14 @@ export default {
       
       this.results = items;  
     },
-    createBook: function(){
+    createBook: function(index){
+      const $title = document.getElementById('title'+index);
+      const $author = document.getElementById('author'+index);
+      console.log($title)
       this.$http
         .post('/user_books', {
-          title: '鬼滅',
-          author: '',
+          title: $title.value,
+          author: $author.value,
           image: ''
         })
     }

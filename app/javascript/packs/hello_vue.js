@@ -9,9 +9,11 @@ import Vue from 'vue'
 import App from '../parts/book_list.vue'
 import axios from 'axios';
 
-Vue.prototype.$http = axios.create(
-  { baseURL: process.env.VUE_APP_API_URI, withCredentials: true },
-);
+axios.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
+Vue.prototype.$http = axios
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
