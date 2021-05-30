@@ -9,7 +9,7 @@
           {{ result.title }}
         </a>
         <input :id="'title' + index" type='hidden' :value="result.title" name="title">
-        <img class='w100 object-fit-contain bg-gray' :src="result.image">
+        <img :id="'image'+ index" class='w100 object-fit-contain bg-gray' :src="result.image">
         <div v-for="author in result.authors">
           {{ author }}
         </div>
@@ -69,13 +69,21 @@ export default {
     createBook: function(index){
       const $title = document.getElementById('title'+index);
       const $author = document.getElementById('author'+index);
+      const $image = document.getElementById('image'+index);
+      const urlString = $image.src.replace('http://','https://');
+      console.log(urlString)
+      const data = new FormData();
+      data.append("title", $title.value);
+      data.append("author", $author.value);
+      data.append("user_book_image", urlString);
+      const headers = { "content-type": "multipart/form-data" };
       console.log($title)
       this.$http
-        .post('/user_books', {
-          title: $title.value,
-          author: $author.value,
-          image: ''
-        })
+      .post(
+        '/user_books',
+        data,
+        { headers }
+      )
     }
   }
 }
