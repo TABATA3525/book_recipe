@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'BookList',
   data: function () {
     return {
       results: [],
@@ -30,14 +30,14 @@ export default {
     }
   },
   async mounted() {
-    console.log(123)
+    console.log(1)
   },
   methods: {
     searchBooks: async function(query) {
-      var endpoint = 'https://www.googleapis.com/books/v1';
+      var apiUrl = 'https://www.googleapis.com/books/v1';
   
       // 検索 API を叩く
-      var res = await fetch(`${endpoint}/volumes?q=${query}`);
+      var res = await fetch(`${apiUrl}/volumes?q=${query}`);
       // JSON に変換
       var data = await res.json();
       
@@ -52,7 +52,6 @@ export default {
           image: vi.imageLinks ? vi.imageLinks.smallThumbnail : '',
         }; 
       });
-      
       return items;
     },
     changeBooks: async function(){
@@ -62,8 +61,7 @@ export default {
         return
       }
       var items = await this.searchBooks(value);
-      console.log(items)
-      
+      console.log(items);
       this.results = items;  
     },
     createBook: function(index){
@@ -71,13 +69,13 @@ export default {
       const $author = document.getElementById('author'+index);
       const $image = document.getElementById('image'+index);
       const urlString = $image.src.replace('http://','https://');
-      console.log(urlString)
       const data = new FormData();
+      console.log(data);
       data.append("title", $title.value);
       data.append("author", $author.value);
       data.append("user_book_image", urlString);
+      console.log(data.get('title'));
       const headers = { "content-type": "multipart/form-data" };
-      console.log($title)
       this.$http
       .post(
         '/user_books',

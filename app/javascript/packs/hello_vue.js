@@ -6,7 +6,7 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue'
-import App from '../parts/book_list.vue'
+import BookList from '../parts/book_list.vue'
 import axios from 'axios';
 
 axios.defaults.headers.common = {
@@ -16,11 +16,11 @@ axios.defaults.headers.common = {
 Vue.prototype.$http = axios
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({
-    render: h => h(App)
+  const bookList = new Vue({
+    render: h => h(BookList)
   }).$mount()
   var element = document.getElementById('bookForm');
-  element.append(app.$el)
+  element.append(bookList.$el)
 })
 
 
