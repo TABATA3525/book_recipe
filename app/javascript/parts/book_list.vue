@@ -52,6 +52,7 @@ export default {
           image: vi.imageLinks ? vi.imageLinks.smallThumbnail : '',
         }; 
       });
+      console.log("searchBooks");
       return items;
     },
     changeBooks: async function(){
@@ -60,6 +61,7 @@ export default {
         this.results = ''
         return
       }
+      console.log("changeBooks");
       var items = await this.searchBooks(value);
       console.log(items);
       this.results = items;  
