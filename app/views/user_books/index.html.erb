@@ -1,0 +1,25 @@
+<table>
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>著者</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @userBooks.each do |userBook| %>
+      <tr>
+        <td><%= userBook.title %></td>
+        <td><%= userBook.author %></td>
+        <td>
+          <% if userBook.user_book_image.present? %>
+            <%= image_tag userBook.user_book_image %>
+          <% end %>
+        </td>
+        <td><%= link_to "編集", edit_user_book_path(userBook) %></td>
+        <td><%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
