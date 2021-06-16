@@ -2,25 +2,26 @@
 <span>現在ログイン中のユーザー：<%= current_user.name %></span>
 <%= form_for(@userBook, url: user_book_path(@userBook)) do |f| %>
     <div>
-        <%= f.label :タイトル %><br>
+        <label>タイトル</label><br>
         <%= f.text_field :title, autofocus: true %>
     </div>
     <div>
-        <%= f.label :著者 %><br>
+        <label>著者</label><br>
         <%= f.text_field :author %>
     </div>
+    
     <div>
-        <%= f.label :カテゴリー %><br>
-        <%= text_field :category, :category_name %>
+        <label>カテゴリー</label><br>
+        <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "選択して下さい" %>
+    </div>
+
+    <div>
+        <label>読後感</label><br>
+        <%= f.collection_select :feeling_category_ids, FeelingCategory.all, :id, :feeling_after_reading, include_blank: "選択して下さい" %>
     </div>
     
     <div>
-        <%#= f.label :読後感 %><br>
-        <%#= f.text_field :feeling_category %>
-    </div>
-    
-    <div>
-        <%= f.label :感想 %><br>
+        <label>感想</label><br>
         <%= f.text_area :feeling %>
     </div>
     

@@ -27,6 +27,7 @@ class UserBooksController < ApplicationController
   end
   
   def edit
+    @category = Category.new
   end
 
   def update
@@ -35,6 +36,16 @@ class UserBooksController < ApplicationController
         author: user_book_update_params[:author],
         feeling: user_book_update_params[:feeling]
       )
+      @userCategory = UserCategory.new(
+        user_book_id: @userBook.id,
+        category_id: user_book_update_params[:category_ids]
+      )
+      @userCategory.save!
+      @userFeelingCategory = UserFeelingCategory.new(
+        user_book_id: @userBook.id,
+        feeling_category_id: user_book_update_params[:feeling_category_ids]
+      )
+      @userFeelingCategory.save!
       redirect_to user_books_url
     else
       render :edit
@@ -51,10 +62,9 @@ class UserBooksController < ApplicationController
   end
   
   def user_book_update_params
-    params.require(:user_book).permit(:title, :author, :feeling_category, :feeling)
-    params.require(:category).permit(:category_name)
+    params.require(:user_book).permit(:title, :author, :feeling_category, :feeling, :category_ids, :feeling_category_ids)
   end
-  
+    
   def set_user_book
     @userBook = UserBook.find(params[:id]) 
   end
