@@ -18,8 +18,8 @@
     <div>
         <label>読後感</label><br>
         <%= f.collection_select :feeling_category_ids, FeelingCategory.all, :id, :feeling_after_reading, include_blank: "選択して下さい" %>
+        <%= text_field :user_feeling_category, :stars %>
     </div>
-    
     <div>
         <label>感想</label><br>
         <%= f.text_area :feeling %>
