@@ -9,6 +9,7 @@ import Vue from 'vue'
 import BookList from '../parts/book_list.vue'
 import axios from 'axios';
 
+
 axios.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')

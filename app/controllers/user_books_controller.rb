@@ -45,6 +45,7 @@ class UserBooksController < ApplicationController
         user_book_id: @userBook.id
       )
       @userFeelingCategory.feeling_category_id = user_book_update_params[:feeling_category_ids]
+      @userFeelingCategory.stars = user_book_update_params[:user_feeling_category_stars]
       @userFeelingCategory.save!
       redirect_to user_books_url
     else
@@ -62,7 +63,8 @@ class UserBooksController < ApplicationController
   end
   
   def user_book_update_params
-    params.require(:user_book).permit(:title, :author, :feeling_category, :feeling, :category_ids, :feeling_category_ids)
+    params.require(:user_book).permit(:title, :author, :feeling_category, :feeling, 
+                                      :category_ids, :feeling_category_ids,:user_feeling_category_stars)
   end
     
   def set_user_book

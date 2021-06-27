@@ -1,3 +1,5 @@
+<%= javascript_pack_tag 'star_vue' %>
+
 <h1>Posts#edit</h1>
 <span>現在ログイン中のユーザー：<%= current_user.name %></span>
 <%= form_for(@userBook, url: user_book_path(@userBook)) do |f| %>
@@ -18,7 +20,8 @@
     <div>
         <label>読後感</label><br>
         <%= f.collection_select :feeling_category_ids, FeelingCategory.all, :id, :feeling_after_reading, include_blank: "選択して下さい" %>
-        <%= text_field :user_feeling_category, :stars %>
+        <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: @userBook.user_feeling_categories.first.stars %>
+        <div id="star_input"></div>
     </div>
     <div>
         <label>感想</label><br>
