@@ -17,7 +17,7 @@
             <%= image_tag userBook.user_book_image %>
           <% end %>
         </td>
-        <td><%= link_to "編集", edit_user_book_path(userBook) %></td>
+        <td><%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false %></td>
         <td><%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？" } %></td>
       </tr>
     <% end %>
