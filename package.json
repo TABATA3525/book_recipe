@@ -2,6 +2,7 @@
   "name": "book_recipe",
   "private": true,
   "dependencies": {
+    "@mdi/font": "^5.9.55",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -11,10 +12,15 @@
     "vue": "^2.6.12",
     "vue-loader": "^15.9.7",
     "vue-star-rating": "^1.7.0",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "vuetify": "^2.5.6"
   },
   "version": "0.1.0",
   "devDependencies": {
+    "deepmerge": "^4.2.2",
+    "fibers": "^5.0.0",
+    "sass": "^1.35.1",
+    "sass-loader": "^12.1.0",
     "webpack-dev-server": "^3.11.2"
   }
 }

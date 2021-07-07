@@ -19,14 +19,29 @@
 
     <div>
         <label>読後感</label><br>
-        <%= f.collection_select :feeling_category_ids, FeelingCategory.all, :id, :feeling_after_reading, include_blank: "選択して下さい" %>
-        <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: @userBook.user_feeling_categories.first.stars %>
-        <div id="star_input"></div>
+        <div class="after-reading-container">
+            <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "選択して下さい" %>
+            <% if @userBook.user_feeling_categories.blank? %>
+                <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: 1 %>
+            <% else %>
+                <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: @userBook.user_feeling_categories&.first&.stars %>
+            <% end %>
+            <div id="star_input"></div>
+        </div>
     </div>
+    
+    <div>
+        <%= text_field :user_book, :feeling_after_reading %>
+    </div>
+    
     <div>
         <label>感想</label><br>
         <%= f.text_area :feeling %>
     </div>
     
     <div><%= f.submit "更新する" %></div>
+    
+    <div>
+        <%= link_to("戻る", user_books_path) %>
+    </div>
 <% end %>

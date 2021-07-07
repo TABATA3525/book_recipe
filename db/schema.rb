@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_30_074259) do
+ActiveRecord::Schema.define(version: 2021_07_04_160500) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 2021_05_30_074259) do
     t.string "feeling_after_reading"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_feeling_categories_on_user_id"
   end
 
   create_table "user_books", force: :cascade do |t|
@@ -86,6 +88,7 @@ ActiveRecord::Schema.define(version: 2021_05_30_074259) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "feeling_categories", "users"
   add_foreign_key "user_books", "users"
   add_foreign_key "user_categories", "user_books"
   add_foreign_key "user_feeling_categories", "user_books"
