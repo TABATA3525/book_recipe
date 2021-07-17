@@ -4,6 +4,11 @@
 <span>現在ログイン中のユーザー：<%= current_user.name %></span>
 <%= form_for(@userBook, url: user_book_path(@userBook)) do |f| %>
     <div>
+        <% if @userBook.user_book_image.present? %>
+            <%= image_tag @userBook.user_book_image %>
+        <% end %>
+    </div>
+    <div>
         <label>タイトル</label><br>
         <%= f.text_field :title, autofocus: true %>
     </div>
