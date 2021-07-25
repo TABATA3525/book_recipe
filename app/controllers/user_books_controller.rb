@@ -42,15 +42,17 @@ class UserBooksController < ApplicationController
       @userCategory.category_id = user_book_update_params[:category_ids]
       @userCategory.save!
     end
-    
-    if user_book_update_params[:felling_category_ids].present?
-      @userFeelingCategory = UserFeelingCategory.find_or_initialize_by(
-        user_book_id: @userBook.id
-      )
-    
-      @userFeelingCategory.feeling_category_id = user_book_update_params[:feeling_category_ids]
-      @userFeelingCategory.stars = user_book_update_params[:user_feeling_category_stars]
-      @userFeelingCategory.save!
+    if user_book_update_params[:feeling_category_id].present?
+      @userBook.feeling_categories.destroy_all
+      user_book_update_params[:feeling_category_id].each_with_index do |feeling_category_id, index|
+        @userFeelingCategory = UserFeelingCategory.new(
+          user_book_id: @userBook.id
+        )
+      
+        @userFeelingCategory.feeling_category_id = feeling_category_id
+        @userFeelingCategory.stars = user_book_update_params[:user_feeling_category_star][index]
+        @userFeelingCategory.save!
+      end
     end
     
     if user_book_update_params[:feeling_after_reading].present?
@@ -74,8 +76,8 @@ class UserBooksController < ApplicationController
   
   def user_book_update_params
     params.require(:user_book).permit(:title, :author, :feeling_category, :feeling, 
-                                      :category_ids, :feeling_category_ids,:user_feeling_category_stars,
-                                      :feeling_after_reading
+                                      :category_ids, :feeling_after_reading, :feeling_category_ids,
+                                      user_feeling_category_star: [], feeling_category_id: []
                                      )
   end
     

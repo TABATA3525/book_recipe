@@ -25,13 +25,15 @@
     <div>
         <label>読後感</label><br>
         <div class="after-reading-container">
-            <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "選択して下さい" %>
-            <% if @userBook.user_feeling_categories.blank? %>
-                <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: 1 %>
-            <% else %>
-                <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: @userBook.user_feeling_categories&.first&.stars %>
-            <% end %>
             <div id="star_input"></div>
+            <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "選択して下さい" %>
+
+            <% if @userBook.user_feeling_categories.empty? %>
+                <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: 1 %>
+            <% end %>
+            <% @userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
+                <%= hidden_field :user_feeling_categories, :stars, id: "star_value#{index}", value: user_feeling_category.stars %>
+            <% end %>
         </div>
     </div>
     
