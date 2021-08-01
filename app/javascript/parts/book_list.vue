@@ -82,8 +82,9 @@ export default {
       .post(
         '/user_books',
         data,
-        { headers }
+        { headers },
       )
+      window.location.href='/user_books'
     }
   }
 }
