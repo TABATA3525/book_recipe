@@ -18,33 +18,43 @@ export default {
       star: {
         rating: []
       },
-      feelingCategories: [
-        {
-          innerHTML: ""
-        }
-      ],
+      feelingCategories: []
     }
   },
   async mounted() {
-    let star_elements = document.getElementsByName('user_feeling_categories[stars]');
+    let default_star_elements = document.getElementsByName('user_feeling_categories[stars]');
     let feeling_category_element = document.getElementById('user_book_feeling_category_ids');
     feeling_category_element.hidden = true;
     
-    for(let index=0; index < star_elements.length; index++) 
+    for(let index=0; index<default_star_elements.length; index++) 
     {
-      var star_value_element = document.getElementById('star_value'+ index);
       this.feelingCategories.push({
         innerHTML: feeling_category_element.innerHTML
       })
     };
+    this.setRatingInit();
+    this.setAfterReadingInit();
   },
   methods: {
-    setRating: function(rating){
-      // this.$refs.hidden_stars_.value = this.rating
+    setRating: function(){
       let refs = this.$refs
       this.star.rating.forEach(function(element,index){
         let property = "hidden_stars_"+index;
         refs[property][0].value = element
+      });
+    },
+    setRatingInit: function(){
+      let default_star_elements = document.getElementsByName('user_feeling_categories[stars]');
+      let that = this
+      default_star_elements.forEach(function(element,index){
+        that.star.rating[index] = Number(element.value);
+      });
+    },
+    setAfterReadingInit: function(){
+      let default_after_reading_elements = document.getElementsByClassName('user_feeling_categories[feeling_after_readings]');
+      let that = this;
+      Array.prototype.forEach.call(default_after_reading_elements, function(element, index) {
+        that.feelingCategories[index].innerHTML = element.innerHTML;
       });
     },
     addFeelingCategory () {

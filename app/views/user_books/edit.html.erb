@@ -33,6 +33,8 @@
             <% end %>
             <% @userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
                 <%= hidden_field :user_feeling_categories, :stars, id: "star_value#{index}", value: user_feeling_category.stars %>
+                <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, 
+                    {include_blank: "選択して下さい",selected: user_feeling_category.feeling_category.id}, { id: "feeling_after_reading#{index}", class: "user_feeling_categories[feeling_after_readings]", style: "display:none;" } %>
             <% end %>
         </div>
     </div>
