@@ -8,6 +8,12 @@ class UserBooksController < ApplicationController
     @userBooks = UserBook.all
   end
   
+  def search
+    @userBooks = UserBook.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
+  end
+  
   def new
   end
   

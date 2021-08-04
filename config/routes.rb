@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   root 'application#hello'
   resources :user_books
   post '/user_books/:id' => "user_books#update"
+  
+  get 'search' => 'user_books#search'
 end
