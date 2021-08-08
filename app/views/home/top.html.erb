@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Book Recipe</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul class="global-nav">
+        <li><%= link_to '本の新規登録', new_user_book_path %></li>
+        <li><%= link_to '本の一覧', user_books_path %></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div id="wrap">
+    <div class="content">
+      <h1>Book Recipe</h1>
+      <p>このアプリは、本の感想アプリです。
+      <br>読み終わった後の読後感を、カテゴリー分けして、記録・検索できます。
+      <br>まるで処方箋のように、その時の気分に寄り添った読後感の本を選び、読み返すことができます。ぜひ、自分だけの『本の処方箋』を、楽しんで作ってみましょう。</p>
+    </div>
+  </div>
+</body>
+</html>

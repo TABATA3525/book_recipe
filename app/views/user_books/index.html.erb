@@ -1,32 +1,40 @@
 <div class="search-form">
   <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.text_field :keyword, value: @keyword, placeholder: "タイトル・著者名" %><br>
+    <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "カテゴリーを選択して下さい", selected: @category_ids %><br>
+    <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "読後感を選択して下さい",selected: @feeling_category_ids %><br>
     <%= f.submit "検索" %>
   <% end %>
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>タイトル</th>
-      <th>著者</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    <% @userBooks.each do |userBook| %>
+<% if @userBooks.blank? %>
+  <div>
+    検索結果が該当しませんでした。
+  </div>
+<% else %>
+  <table>
+    <thead>
       <tr>
-        <td><%= userBook.title %></td>
-        <td><%= userBook.author %></td>
-        <td>
-          <% if userBook.user_book_image.present? %>
-            <%= image_tag userBook.user_book_image %>
-          <% end %>
-        </td>
-        <td><%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false %></td>
-        <td><%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？" } %></td>
+        <th>タイトル</th>
+        <th>著者</th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    
+    <tbody>
+      <% @userBooks.each do |userBook| %>
+        <tr>
+          <td><%= userBook.title %></td>
+          <td><%= userBook.author %></td>
+          <td>
+            <% if userBook.user_book_image.present? %>
+              <%= image_tag userBook.user_book_image %>
+            <% end %>
+          </td>
+          <td><%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false %></td>
+          <td><%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
