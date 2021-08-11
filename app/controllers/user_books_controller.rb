@@ -38,7 +38,7 @@ class UserBooksController < ApplicationController
     @userCategory.save!
     @userFeelingCategory = UserFeelingCategory.new(feeling_category_id: 100005, user_book_id: @userBook.id)
     @userFeelingCategory.save!
-    redirect_to(new_user_book_path)
+    redirect_to(user_books_path)
   end
   
   def edit

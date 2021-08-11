@@ -35,6 +35,9 @@ export default {
     this.setRatingInit();
     this.setAfterReadingInit();
   },
+  update() {
+    this.setRating()
+  },
   methods: {
     setRating: function(){
       let refs = this.$refs
