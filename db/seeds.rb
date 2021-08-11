@@ -5,6 +5,7 @@ categories = [
     { id: 100002, category_name: '歴史' },
     { id: 100003, category_name: 'サスペンス' },
     { id: 100004, category_name: 'ホラー' },
+    { id: 100005, category_name: '未登録'}
 ]
 
 feeling_categories = [
@@ -13,6 +14,7 @@ feeling_categories = [
     { id: 100002, feeling_after_reading: '分かりやすい' },
     { id: 100003, feeling_after_reading: 'ハラハラ' },
     { id: 100004, feeling_after_reading: '怖い' },
+    { id: 100005, feeling_after_reading: '未登録'}
 ]
 
 categories.each do |category|

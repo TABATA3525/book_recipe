@@ -1,4 +1,6 @@
 <div class="search-form">
+  <!--カテゴリーもしくは読後感が未登録の場合も、検索できるようにしたい -->
+  <h1>登録した本の一覧</h1>
   <%= form_with url: search_path, method: :get, local: true do |f| %>
     <%= f.text_field :keyword, value: @keyword, placeholder: "タイトル・著者名" %><br>
     <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "カテゴリーを選択して下さい", selected: @category_ids %><br>
@@ -9,7 +11,7 @@
 
 <% if @userBooks.blank? %>
   <div>
-    検索結果が該当しませんでした。
+    検索条件に一致する本がありません。
   </div>
 <% else %>
   <table>
@@ -38,3 +40,4 @@
     </tbody>
   </table>
 <% end %>
+<%= link_to '本の一覧に戻る', user_books_path %>

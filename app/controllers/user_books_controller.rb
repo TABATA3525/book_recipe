@@ -31,7 +31,14 @@ class UserBooksController < ApplicationController
       f = open user_book_params[:user_book_image]
       @userBook.user_book_image.attach io: f, filename: File.basename(f)
     end
-    @userBook.save
+    @userBook.save!
+    
+    # 登録したら、カテゴリーと読後感の初期設定を『未登録』カテゴリーにしたい。
+    @userCategory = UserCategory.new(category_id: 100005, user_book_id: @userBook.id)
+    @userCategory.save!
+    @userFeelingCategory = UserFeelingCategory.new(feeling_category_id: 100005, user_book_id: @userBook.id)
+    @userFeelingCategory.save!
+    redirect_to(new_user_book_path)
   end
   
   def edit
