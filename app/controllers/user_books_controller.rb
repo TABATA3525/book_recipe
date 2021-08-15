@@ -38,7 +38,7 @@ class UserBooksController < ApplicationController
     @userCategory.save!
     @userFeelingCategory = UserFeelingCategory.new(feeling_category_id: 100005, user_book_id: @userBook.id)
     @userFeelingCategory.save!
-    redirect_to(user_books_path)
+    render starus: 200, json: {status: 200, message: "Success" }
   end
   
   def edit

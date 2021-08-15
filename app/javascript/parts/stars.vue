@@ -35,7 +35,7 @@ export default {
     this.setRatingInit();
     this.setAfterReadingInit();
   },
-  update() {
+  updated() {
     this.setRating()
   },
   methods: {

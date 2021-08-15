@@ -28,7 +28,7 @@ gem 'bootsnap', '1.4.5', require: false
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '1.4.1'
+  gem 'mysql2'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
 end

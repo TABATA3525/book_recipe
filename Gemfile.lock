@@ -109,6 +109,7 @@ GEM
     mini_portile2 (2.5.0)
     minitest (5.14.4)
     msgpack (1.4.2)
+    mysql2 (0.5.3)
     nio4r (2.5.7)
     nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
@@ -185,7 +186,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.1)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -226,6 +226,7 @@ DEPENDENCIES
   devise
   jbuilder (= 2.9.1)
   listen (= 3.1.5)
+  mysql2
   pg (= 1.1.4)
   puma (= 4.3.6)
   rails (= 6.0.3)
@@ -233,7 +234,6 @@ DEPENDENCIES
   selenium-webdriver (= 3.142.4)
   spring (= 2.1.0)
   spring-watcher-listen (= 2.0.1)
-  sqlite3 (= 1.4.1)
   turbolinks (= 5.2.0)
   tzinfo-data
   web-console (= 4.0.1)
