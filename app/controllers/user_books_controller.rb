@@ -85,6 +85,7 @@ class UserBooksController < ApplicationController
     redirect_to user_books_url
   end
   
+  private
   def user_book_params
     params.permit(:title, :author, :user_book_image)
   end
