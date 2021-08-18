@@ -1,0 +1,36 @@
+<div class="categories-wrapper">
+  <div class="container">
+    <div class="categories">
+      <div class="default-categories">
+        <h2>既存のカテゴリー</h2>
+        <% @defaultCategories.each do |defaultCategory| %>
+          <div>
+            <%= defaultCategory.category_name %>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="edit-categories">  
+        <h2>カテゴリーを編集する</h2>
+          <% @categories.each do |category| %>
+            <div>
+              <%= category.category_name %>
+              <%= link_to "編集する", category_edit_path(category.id) %> 
+              <%= link_to "削除する", category_destroy_path(category.id), method: :delete, data: { confirm: "削除してもよろしいですか？" } %>
+            </div>
+          <% end %>
+      </div>
+      
+      <div class="create-category">
+        <%= form_tag(categories_create_path, method: :post) do %>
+          <h2>カテゴリーを新規登録する</h2>
+          <input type="text" name="category_name">
+          <div class="create-botton">
+            <input type="submit" value="新規登録する">
+          </div>
+        <% end %>
+      </div>
+      <%= link_to '登録した本の一覧', user_books_url %>
+    </div>
+  </div>
+</div>

@@ -83,8 +83,11 @@ export default {
         '/user_books',
         data,
         { headers },
-      )
-      window.location.href='/user_books'
+      ).then(response => {
+        window.location.href='/user_books'
+      }).catch(function(error) {
+        window.location.href='/user_books'
+      });
     }
   }
 }

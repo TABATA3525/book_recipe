@@ -8,6 +8,14 @@ class UserBooksController < ApplicationController
     @userBooks = UserBook.all
   end
   
+  def search
+    @userBooks = UserBook.search(params[:keyword],params[:category_ids],params[:feeling_category_ids])
+    @keyword = params[:keyword]
+    @category_ids = params[:category_ids]
+    @feeling_category_ids = params[:feeling_category_ids]
+    render "index"
+  end
+  
   def new
   end
   
@@ -23,7 +31,14 @@ class UserBooksController < ApplicationController
       f = open user_book_params[:user_book_image]
       @userBook.user_book_image.attach io: f, filename: File.basename(f)
     end
-    @userBook.save
+    @userBook.save!
+    
+    # 登録したら、カテゴリーと読後感の初期設定を『未登録』カテゴリーにしたい。
+    @userCategory = UserCategory.new(category_id: 100005, user_book_id: @userBook.id)
+    @userCategory.save!
+    @userFeelingCategory = UserFeelingCategory.new(feeling_category_id: 100005, user_book_id: @userBook.id)
+    @userFeelingCategory.save!
+    render starus: 200, json: {status: 200, message: "Success" }
   end
   
   def edit
@@ -70,6 +85,7 @@ class UserBooksController < ApplicationController
     redirect_to user_books_url
   end
   
+  private
   def user_book_params
     params.permit(:title, :author, :user_book_image)
   end
