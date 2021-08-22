@@ -34,9 +34,9 @@ class UserBooksController < ApplicationController
     @userBook.save!
     
     # 登録したら、カテゴリーと読後感の初期設定を『未登録』カテゴリーにしたい。
-    @userCategory = UserCategory.new(category_id: 100005, user_book_id: @userBook.id)
+    @userCategory = UserCategory.new(category_id: 1, user_book_id: @userBook.id)
     @userCategory.save!
-    @userFeelingCategory = UserFeelingCategory.new(feeling_category_id: 100005, user_book_id: @userBook.id)
+    @userFeelingCategory = UserFeelingCategory.new(feeling_category_id: 1, user_book_id: @userBook.id)
     @userFeelingCategory.save!
     render starus: 200, json: {status: 200, message: "Success" }
   end
