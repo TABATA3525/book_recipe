@@ -11,13 +11,13 @@ class FeelingCategoriesController < ApplicationController
   def update
     if feeling_category_params[:feeling_after_reading].present?
       @feelingCategory = FeelingCategory.find_or_initialize_by(
-        id: feeling_category[:feeling_category_id],
+        id: feeling_category_params[:feeling_category_id],
         user_id: current_user.id
       )
       @feelingCategory.feeling_after_reading = feeling_category_params[:feeling_after_reading]
       @feelingCategory.save!
     end
-    redirect_to feeling_categories_edit_url
+    redirect_to feeling_categories_index_url
   end
   
   def create

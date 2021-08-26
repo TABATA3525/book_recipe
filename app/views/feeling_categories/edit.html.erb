@@ -1,0 +1,17 @@
+<div class="feeling-categories-wrapper">
+  <div class="container">
+    <div class="feeling-categories">
+      <h2>読後感を編集する</h2>
+      <div class="create-feeling-category">
+        <%= form_tag(feeling_categories_update_path, method: :post) do %>
+          <h2>読後感を編集する</h2>
+          <input type="text" name="feeling_after_reading" value="<%= @feelingCategory.feeling_after_reading %>">
+          <input type="hidden" name="feeling_category_id" value="<%= @feelingCategory.id %>">
+          <div class="create-botton">
+            <input type="submit" value="編集する">
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
