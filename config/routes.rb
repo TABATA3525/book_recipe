@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   post '/categories/update' => 'categories#update'
   delete '/categories/:id' => 'categories#destroy', as: 'category_destroy'
   
-  get '/feeling_categories/edit' => 'feeling_categories#edit'
+  get '/feeling_categories/index' => 'feeling_categories#index'
+  get '/feeling_categories/:id/edit' => 'feeling_categories#edit', as: 'feeling_category_edit'
+  post '/feeling_categories/create' => 'feeling_categories#create'
+  post '/feeling_categories/update' => 'feeling_categories#update'
+  delete '/feeling_categories/:id' => 'feeling_categories#destroy', as: 'feeling_categories_destroy'
   
   get 'search' => 'user_books#search'
 end

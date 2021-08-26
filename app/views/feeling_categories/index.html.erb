@@ -1,0 +1,36 @@
+<div class="feeling-categories-wrapper">
+  <div class="container">
+    <div class="feeling-categories">
+      <div class="default-feeling-categories">
+        <h2>既存の読後感</h2>
+        <% @defaultFeelingCategories.each do |defaultFeelingCategory| %>
+          <div>
+            <%= defaultFeelingCategory.feeling_after_reading %>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="edit-feeling-categories">  
+        <h2>読後感を編集する</h2>
+          <% @feelingCategories.each do |feelingCategory| %>
+            <div>
+              <%= feelingCategory.feeling_after_reading %>
+              <%= link_to "編集する", feeling_category_edit_path(feelingCategory.id) %>
+              <%= link_to "削除する", feeling_categories_destroy_path(feelingCategory.id), method: :delete, data: { confirm: "削除してもよろしいですか？" } %>
+            </div>
+          <% end %>
+      </div>
+      
+      <div class="create-feeling-category">
+        <%= form_tag(feeling_categories_create_path, method: :post) do %>
+          <h2>読後感を新規登録する</h2>
+          <input type="text" name="feeling_after_reading">
+          <div class="create-botton">
+            <input type="submit" value="新規登録する">
+          </div>
+        <% end %>
+      </div>
+      <%= link_to '登録した本の一覧', user_books_url %>
+    </div>
+  </div>
+</div>
