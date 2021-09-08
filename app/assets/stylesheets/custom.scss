@@ -1,0 +1,23 @@
+body { 
+    button, input, select, textarea {
+      background-color: transparent;
+      border-style: solid;
+      padding: 1px 2px;
+    }
+  
+    button, input, optgroup, select, textarea {
+        font: inherit;
+    }
+  
+    input {
+        border-radius: 0;
+    }
+  }
+ 
+  image {
+      width: 75px;
+      height: 30px;
+  }
+  .after-reading-container {
+    display: flex;
+  }
