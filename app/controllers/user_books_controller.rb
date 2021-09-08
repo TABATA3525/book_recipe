@@ -13,6 +13,7 @@ class UserBooksController < ApplicationController
     @keyword = params[:keyword]
     @category_ids = params[:category_ids]
     @feeling_category_ids = params[:feeling_category_ids]
+    @stars = params[:stars]
     render "index"
   end
   
