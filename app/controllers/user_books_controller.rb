@@ -9,13 +9,11 @@ class UserBooksController < ApplicationController
   end
   
   def search
-    @userBooks = UserBook.search(params[:keyword],params[:category_ids],params[:feeling_category_ids],params[:stars],params[:feeling_category_ids2],params[:stars2])
+    @userBooks = UserBook.search(params[:keyword],params[:category_ids],params[:feeling_category_ids],params[:stars], current_user)
     @keyword = params[:keyword]
     @category_ids = params[:category_ids]
     @feeling_category_ids = params[:feeling_category_ids]
     @stars = params[:stars]
-    @feeling_category_ids2 = params[:feeling_category_ids2]
-    @stars2 = params[:stars2]
     render "index"
   end
   
