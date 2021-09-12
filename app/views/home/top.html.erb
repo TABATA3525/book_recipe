@@ -1,17 +1,20 @@
-<div id="wrap text-center">
-  <div class="container top-container">
-    <br>このアプリは、本の感想アプリです。
-    <p>読み終わった後の読後感を、記録・検索できます。</p>
-    <p>まるで処方箋のように、その時の気分に寄り添った読後感の本を選び、読み返すことができます。</p>
-    <br><p>ぜひ、自分だけの『本の処方箋』を作って、楽しみましょう。</p>
-    <div class="row">
-      <div class="col-md-offset-3 col-md-3">
-        <%= link_to 'ログイン', new_user_session_url, class: 'btn btn-block btn-white' %>
+<div class="top-hero-wrapper">
+  <div class="container top-hero-container">
+    <h1 class="text-white">Enjoy your reading life!</h1>
+    <h3 class="text-white">このアプリは本の読後感を、記録・検索できます。</h3>
+    <h3 class="text-white">まるで処方箋のように、その時の気分に寄り添った読後感の本を選び、読み返すことができます。</h3>
+    <br><h3 class="text-white">ぜひ、自分だけの『本の処方箋』を作って、読書生活を楽しみましょう！</h3>
+    <% if user_signed_in? %>
+    <% else %>
+      <div class="row">
+        <div class="col-md-offset-3 col-md-3">
+          <%= link_to 'Log in', new_user_session_url, class: 'btn btn-block btn-green' %>
+        </div>
+        <div class="col-md-3">
+          <%= link_to 'Sign up', new_user_registration_url, class: 'btn btn-block btn-green'%>
+        </div>    
       </div>
-      <div class="col-md-3">
-        <%= link_to 'ユーザー新規登録', new_user_registration_url, class: 'btn btn-block btn-white'%>
-      </div>    
-    </div>
+    <% end %>
   </div>
 
   
