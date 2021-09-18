@@ -5,7 +5,9 @@ class UserBooksController < ApplicationController
   before_action :set_user_book, only: [:edit, :show, :destroy, :update]
   
   def index
-    @userBooks = UserBook.all
+    @userBooks = UserBook.all.order(id: 'DESC')
+    @feeling_category_ids = []
+    @stars = []
   end
   
   def search
