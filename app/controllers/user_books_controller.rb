@@ -61,7 +61,7 @@ class UserBooksController < ApplicationController
       @userCategory.save!
     end
     if user_book_update_params[:feeling_category_id].present?
-      @userBook.feeling_categories.destroy_all
+      @userBook.user_feeling_categories.destroy_all
       user_book_update_params[:feeling_category_id].each_with_index do |feeling_category_id, index|
         @userFeelingCategory = UserFeelingCategory.new(
           user_book_id: @userBook.id
@@ -72,14 +72,16 @@ class UserBooksController < ApplicationController
         @userFeelingCategory.save!
       end
     end
-    
-    if user_book_update_params[:feeling_after_reading].present?
-      @feelingCategory = FeelingCategory.find_or_initialize_by(
-        user_id: current_user.id,
-        feeling_after_reading: user_book_update_params[:feeling_after_reading]
-      )
-      @feelingCategory.save!
-    end
+
+    # 読後感のカテゴリーを追加する機能。読後感追加するページは別に作ったので、今後必要なければ、消します。
+    # if user_book_update_params[:feeling_after_reading].present?
+    #   @feelingCategory = FeelingCategory.find_or_initialize_by(
+    #     user_id: current_user.id,
+    #     feeling_after_reading: user_book_update_params[:feeling_after_reading]
+    #   )
+    #   @feelingCategory.save!
+    # end
+
     redirect_to user_books_url
   end
   

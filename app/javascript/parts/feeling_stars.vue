@@ -1,10 +1,8 @@
 <template>
   <div>
-    <div class="star-container" v-for="(feeling, index) in feelingCategoryIds" :key="index" >
-      <input type="hidden" :ref="'hidden_stars_'+index" name="user_book[user_feeling_category_star][]" :id="'user_book_user_feeling_category_stars_'+index">
-      <select v-html="feeling.innerHTML" name="user_book[feeling_category_id][]">
-      </select>
-      <star-rating @rating-selected ="setRating" v-model="star.rating[index]"></star-rating>
+    <div v-for="(feeling, index) in feelingCategoryIds" :key="index" >
+      <div class="feeling_collect" v-html="feeling.innerHTML">
+      </div>
       <v-icon @click="addFeelingCategory" class="plus" large>mdi-plus-circle</v-icon>
     </div>
   </div>
@@ -22,16 +20,33 @@ export default {
     }
   },
   async mounted() {
-    let default_star_elements = document.getElementsByName('feeling_category_ids[]');
-    let feeling_category_element = document.getElementById('feeling_stars');
-    // feeling_category_element.hidden = true;
-    
+    let default_star_elements = document.getElementsByName('dummy_ids[]');
+    let feeling_category_element = document.getElementById('feeling_search');
+    feeling_category_element.hidden = true;
+
     for(let index=0; index<default_star_elements.length; index++) 
     {
+      console.log(feeling_category_element.innerHTML);
       this.feelingCategoryIds.push({
         innerHTML: feeling_category_element.innerHTML
       })
     };
+    
+    // 指定したid属性のHTML要素を取得
+    var feeling_collect = document.getElementsByClassName("feeling_collect");
+
+
+    // パターン1：子要素の数を取得
+    var child_nodes_count = feeling_collect.childElementCount;
+    console.log(feeling_collect); 
+    console.log(child_nodes_count); // 5
+
+
+    // パターン2：全ての子要素を配列形式のプロパティで参照
+    for(var i=0; i<child_nodes_count; i++) {
+      feeling_collect.children[i].attr("name", "feeling_category_ids[]");
+      console.log(feeling_collect.children[i].textContent);
+    }
     // this.setRatingInit();
     // this.setAfterReadingInit();
   },
@@ -61,8 +76,8 @@ export default {
       });
     },
     addFeelingCategory () {
-      let feeling_category_element = document.getElementById('user_book_feeling_category_ids');
-      this.feelingCategories.push({
+      let feeling_category_element = document.getElementById('feeling_search');
+      this.feelingCategoryIds.push({
         innerHTML: feeling_category_element.innerHTML
       })
     }

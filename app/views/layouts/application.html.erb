@@ -27,7 +27,7 @@
                 <p><%= current_user.name %></p>
               </li>
               <li>
-                <%= link_to '登録した本の一覧・検索', user_books_path %>
+                <%= link_to '登録した本の一覧・検索', user_books_path, data: {"turbolinks"=>false} %>
               </li>
               <li>
                 <%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %>

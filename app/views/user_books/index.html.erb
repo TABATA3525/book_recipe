@@ -6,16 +6,17 @@
     <%= f.text_field :keyword, value: @keyword, placeholder: "タイトル・著者名" %><br>
     <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "カテゴリーを選択して下さい", selected: @category_ids %><br>
     <div id="feeling_stars"></div>
-    <% if @feeling_category_ids.empty? %>
-    <div id = "">
-      <%= f.collection_select "feeling_category_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, {include_blank: "読後感を選択して下さい"}, {id: "feeling_stars", class: "hidden"} %>が
-      <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択して下さい" %>
-    <% end %>
-    <% @feeling_category_ids.each_with_index do |feeling_category_id, index| %>
-      <%= f.collection_select "feeling_category_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "読後感を選択して下さい",selected: feeling_category_id %>が
-      <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択して下さい", selected: @stars[index] %>
-      <br>
-    <% end %>
+    <div id="feeling_search">
+      <% if @feeling_category_ids.empty? %>
+        <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, {include_blank: "読後感を選択して下さい"}, {id: "feeling_stars"} %>が
+        <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択して下さい" %>
+      <% end %>
+      <% @feeling_category_ids.each_with_index do |feeling_category_id, index| %>
+        <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "読後感を選択して下さい",selected: feeling_category_id %>が
+        <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択して下さい", selected: @stars[index] %>
+        <br>
+      <% end %>
+    </div>
     <%= f.submit "検索" %>
   <% end %>
 </div>
