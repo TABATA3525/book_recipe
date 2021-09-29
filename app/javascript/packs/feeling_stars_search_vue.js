@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import FeelingStars from '../parts/feeling_stars.vue';
+import FeelingSearch from '../parts/feeling_search.vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import '@mdi/font/css/materialdesignicons.css'
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log(5)
   const starInput = new Vue({
     vuetify,
-    render: h => h(FeelingStars)
+    render: h => h(FeelingSearch)
   }).$mount()
   var element = document.getElementById('feeling_stars');
   console.log(4)

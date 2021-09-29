@@ -1,7 +1,6 @@
 <div class="feeling-categories-wrapper">
   <div class="container">
     <div class="feeling-categories">
-      <h2>読後感を編集する</h2>
       <div class="create-feeling-category">
         <%= form_tag(feeling_categories_update_path, method: :post) do %>
           <h2>読後感を編集する</h2>
@@ -12,6 +11,8 @@
           </div>
         <% end %>
       </div>
+      <br>
+      <%= link_to '読後感の一覧に戻る', feeling_categories_index_url %>
     </div>
   </div>
 </div>

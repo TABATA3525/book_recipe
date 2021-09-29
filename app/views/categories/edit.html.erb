@@ -1,7 +1,6 @@
 <div class="categories-wrapper">
   <div class="container">
     <div class="categories">
-      <h2>カテゴリーを編集する</h2>
       <div class="create-category">
         <%= form_tag(categories_update_path, method: :post) do %>
           <h2>カテゴリーを編集する</h2>
@@ -11,6 +10,9 @@
             <input type="submit" value="編集する">
           </div>
         <% end %>
+        <br>
+        <%= link_to 'カテゴリーの一覧に戻る', categories_index_url %>
+
       </div>
     </div>
   </div>

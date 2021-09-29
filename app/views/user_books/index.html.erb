@@ -1,54 +1,54 @@
 <%= javascript_pack_tag 'feeling_stars_search_vue' %>
 
-<div class="search-form">
-  <h1>登録した本の一覧</h1>
-  <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword, placeholder: "タイトル・著者名" %><br>
-    <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "カテゴリーを選択して下さい", selected: @category_ids %><br>
-    <div id="feeling_stars"></div>
-    <div id="feeling_search">
-      <% if @feeling_category_ids.empty? %>
-        <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, {include_blank: "読後感を選択して下さい"}, {id: "feeling_stars"} %>が
-        <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択して下さい" %>
-      <% end %>
-      <% @feeling_category_ids.each_with_index do |feeling_category_id, index| %>
-        <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "読後感を選択して下さい",selected: feeling_category_id %>が
-        <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択して下さい", selected: @stars[index] %>
-        <br>
-      <% end %>
+<div class="user-books-index-wrapper">
+  <div class="user-book-search container">
+    <div class="row">
+      <div class="search-form col-md-6 col-md-offset-3">
+        <h1>登録した本の検索</h1>
+        <%= form_with url: search_path, method: :get, local: true do |f| %>
+          <%= f.text_field :keyword, value: @keyword, placeholder: "タイトル・著者名" %><br>
+          <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "カテゴリーを選択して下さい", selected: @category_ids %><br>
+          <div id="feeling_stars"></div>
+          <div id="feeling_search">
+            <% if @feeling_category_ids.empty? %>
+              <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, {include_blank: "読後感を選択して下さい"}, {id: "feeling_stars"} %>が
+              <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください" %>
+            <% end %>
+            <% @feeling_category_ids.each_with_index do |feeling_category_id, index| %>
+              <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "読後感を選択して下さい",selected: feeling_category_id %>が
+              <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください", selected: @stars[index] %>
+            <% end %>
+          </div>
+          <%= f.submit "検索" %>
+        <% end %>
+      </div>
     </div>
-    <%= f.submit "検索" %>
+  </div>
+  <% if @userBooks.blank? %>
+    <div class="user-book-search-blank">
+      検索条件に一致する本がありません。
+    </div>
+  <% else %>
+    <div class="user-books-index container">
+      <div class="row">
+        <% @userBooks.each do |userBook| %>
+            <div class="col-md-6 col-md-offset-3">
+              <div class="user-book-index-single">
+                  <% if userBook.user_book_image.present? %>
+                    <%= image_tag userBook.user_book_image %>
+                  <% end %>
+                <div class="user-book-show">
+                  <h3><%= userBook.title %></h3>
+                  <p><%= userBook.author %></p>
+                  <br>
+                  <p><%= userBook.feeling %></p>
+                </div>
+                <%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false %>
+                <%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？" } %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<% if @userBooks.blank? %>
-  <div>
-    検索条件に一致する本がありません。
-  </div>
-<% else %>
-  <table>
-    <thead>
-      <tr>
-        <th>タイトル</th>
-        <th>著者</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <% @userBooks.each do |userBook| %>
-        <tr>
-          <td><%= userBook.title %></td>
-          <td><%= userBook.author %></td>
-          <td>
-            <% if userBook.user_book_image.present? %>
-              <%= image_tag userBook.user_book_image %>
-            <% end %>
-          </td>
-          <td><%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false %></td>
-          <td><%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？" } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
