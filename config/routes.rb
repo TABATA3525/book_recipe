@@ -22,4 +22,10 @@ Rails.application.routes.draw do
   delete '/feeling_categories/:id' => 'feeling_categories#destroy', as: 'feeling_categories_destroy'
   
   get 'search' => 'user_books#search'
+
+  namespace :api, {format: 'json'} do
+    namespace :v1 do
+      resources :feeling_categories, only: [:index]
+    end
+  end
 end

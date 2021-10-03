@@ -4,41 +4,47 @@
   <head>
     <title>Book Recipe</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <header>
-      <div class="logo">
-        <%= link_to root_path do %>
-          <%= image_tag 'logo2-3.png' %>
-        <% end %>
-      </div>
-      <% if user_signed_in? %>
-        <nav>
-          <ul class="global-nav">
-            <li>
-              <%= link_to '登録した本の一覧・検索', user_books_path %>
-            </li>
-            <li>
-              <%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %>
-            </li>
-            <li>
-              <%= link_to 'カテゴリーの追加・編集', categories_index_url %>
-            </li>
-            <li>
-              <%= link_to '読後感の追加・編集', feeling_categories_index_url %>
-            </li>
-            <li>
-              <%= link_to 'ログアウト', destroy_user_session_url, method: :delete %>
-            </li>
+      <nav class="navbar navbar-default navbar-transparent">
+        <div class="container">
+          <%= link_to root_path do %>
+            <span><%= image_tag 'logo2-3.png', class:"logo" %></span>
+          <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li>
+                <p><%= current_user.name %></p>
+              </li>
+              <li>
+                <%= link_to '登録した本の一覧・検索', user_books_path, data: {"turbolinks"=>false} %>
+              </li>
+              <li>
+                <%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %>
+              </li>
+              <li>
+                <%= link_to 'カテゴリーの追加・編集', categories_index_url %>
+              </li>
+              <li>
+                <%= link_to '読後感の追加・編集', feeling_categories_index_url %>
+              </li>
+              <li>
+                <%= link_to 'ログアウト', destroy_user_session_url, method: :delete %>
+              </li>
+            <% end %>
           </ul>
-        </nav>
-      <% end %>
+        </div>
+      </nav>
     </header>
     <%= yield %>
   </body>

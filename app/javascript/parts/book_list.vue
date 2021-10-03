@@ -1,20 +1,23 @@
 <template>
-  <div>
-    <input v-model="search" class='input bg-white mb16' type='search' @input="changeBooks" />
+  <div class="user-book-new-wrapper">
+    <div class="container">
+      <h2>本の新規登録</h2>
+      <input v-model="search" class='input bg-white mb16' type='search' @input="changeBooks" placeholder="本のタイトル・著者名">
       
-    <div>
-      <h2 class='mb8'>検索結果</h2>
-      <div id='$results' v-for="(result, index) in results">
-        <a class='f border bg-white mb8' :href="result.link" target='_blank'>
-          {{ result.title }}
-        </a>
-        <input :id="'title' + index" type='hidden' :value="result.title" name="title">
-        <img :id="'image'+ index" class='w100 object-fit-contain bg-gray' :src="result.image">
-        <div v-for="author in result.authors">
-          {{ author }}
+      <div class="user-book-new-search">
+        <h2 class='mb8'>検索結果</h2>
+        <div id='$results' v-for="(result, index) in results">
+          <a class='f border bg-white mb8' :href="result.link" target='_blank'>
+            {{ result.title }}
+          </a>
+          <input :id="'title' + index" type='hidden' :value="result.title" name="title">
+          <img :id="'image'+ index" class='w100 object-fit-contain bg-gray' :src="result.image">
+          <div v-for="author in result.authors">
+            {{ author }}
+          </div>
+          <input :id="'author' + index" type="hidden" :value="result.authors" name="author">
+          <button type="button" @click="createBook(index)">登録する</button>
         </div>
-        <input :id="'author' + index" type="hidden" :value="result.authors" name="author">
-        <button type="button" @click="createBook(index)">登録する</button>
       </div>
     </div>
   </div>

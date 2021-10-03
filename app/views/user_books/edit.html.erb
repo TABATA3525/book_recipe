@@ -1,56 +1,59 @@
 <%= javascript_pack_tag 'star_vue' %>
+<div class="user-book-edit-wrapper">
+    <div class="container user-book-edit-form">
+        <%= form_for(@userBook, url: user_book_path(@userBook)) do |f| %>
+            <div class="user-book-image">
+                <% if @userBook.user_book_image.present? %>
+                    <%= image_tag @userBook.user_book_image %>
+                <% end %>
+            </div>
+            <div class="user-book-title">
+                <label>タイトル</label><br>
+                <%= f.text_field :title, autofocus: true %>
+            </div>
+            <div class="user-book-author">
+                <label>著者</label><br>
+                <%= f.text_field :author %>
+            </div>
+            
+            <div class="category">
+                <label>カテゴリー</label><br>
+                <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "選択して下さい" %>
+            </div>
 
-<h1>Posts#edit</h1>
-<span>現在ログイン中のユーザー：<%= current_user.name %></span>
-<%= form_for(@userBook, url: user_book_path(@userBook)) do |f| %>
-    <div>
-        <% if @userBook.user_book_image.present? %>
-            <%= image_tag @userBook.user_book_image %>
+            <div class="feeling-after-reading">
+                <label>読後感</label><br>
+                <div class="after-reading-container">
+                    <div id="star_input"></div>
+                    <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "選択して下さい" %>
+
+                    <% if @userBook.user_feeling_categories.empty? %>
+                        <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: 1 %>
+                    <% end %>
+                    <% @userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
+                        <%= hidden_field :user_feeling_categories, :stars, id: "star_value#{index}", value: user_feeling_category.stars %>
+                        <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, 
+                            {include_blank: "選択して下さい",selected: user_feeling_category.feeling_category.id}, { id: "feeling_after_reading#{index}", class: "user_feeling_categories[feeling_after_readings]", style: "display:none;" } %>
+                    <% end %>
+                </div>
+            </div>
+            
+            <!-- 読後感のカテゴリーを新しく追加するフォーム。必要なければ、後ほど消します -->
+            <!-- <div> -->
+             <%# text_field :user_book, :feeling_after_reading %>
+            <!-- </div> -->
+            
+            <div class="feeling-container">
+                <label>感想</label><br>
+                <%= f.text_area :feeling %>
+            </div>
+            
+            <div class="edit-submit"><%= f.submit "更新する" %></div>
+
+            <div>
+                <%= link_to("戻る", user_books_path, data: {"turbolinks"=>false}) %>
+            </div>
         <% end %>
     </div>
-    <div>
-        <label>タイトル</label><br>
-        <%= f.text_field :title, autofocus: true %>
-    </div>
-    <div>
-        <label>著者</label><br>
-        <%= f.text_field :author %>
-    </div>
-    
-    <div>
-        <label>カテゴリー</label><br>
-        <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "選択して下さい" %>
-    </div>
+</div>    
 
-    <div>
-        <label>読後感</label><br>
-        <div class="after-reading-container">
-            <div id="star_input"></div>
-            <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "選択して下さい" %>
-
-            <% if @userBook.user_feeling_categories.empty? %>
-                <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: 1 %>
-            <% end %>
-            <% @userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
-                <%= hidden_field :user_feeling_categories, :stars, id: "star_value#{index}", value: user_feeling_category.stars %>
-                <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, 
-                    {include_blank: "選択して下さい",selected: user_feeling_category.feeling_category.id}, { id: "feeling_after_reading#{index}", class: "user_feeling_categories[feeling_after_readings]", style: "display:none;" } %>
-            <% end %>
-        </div>
-    </div>
-    
-    <div>
-        <%= text_field :user_book, :feeling_after_reading %>
-    </div>
-    
-    <div>
-        <label>感想</label><br>
-        <%= f.text_area :feeling %>
-    </div>
-    
-    <div><%= f.submit "更新する" %></div>
-    
-    <div>
-        <%= link_to("戻る", user_books_path) %>
-    </div>
-<% end %>
