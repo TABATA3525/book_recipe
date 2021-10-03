@@ -49,7 +49,7 @@ class UserBook < ApplicationRecord
         user_book_ids = user_book_ids & feeling_category_query.pluck(:id)
       end
     end
-    query = query.where(id: user_book_ids) if user_book_ids.present?
+    query = query.where(id: user_book_ids)
     return query
   end
 end

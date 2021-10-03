@@ -8,12 +8,10 @@ Vue.use(Vuetify); // 追加
 const vuetify = new Vuetify(); // 追加
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log(5)
-  const starInput = new Vue({
+  const feelingStarsSearch = new Vue({
     vuetify,
     render: h => h(FeelingSearch)
   }).$mount()
   var element = document.getElementById('feeling_stars');
-  console.log(4)
-  element.append(starInput.$el)
+  element.append(feelingStarsSearch.$el)
 });

@@ -51,7 +51,7 @@
             <div class="edit-submit"><%= f.submit "更新する" %></div>
 
             <div>
-                <%= link_to("戻る", user_books_path) %>
+                <%= link_to("戻る", user_books_path, data: {"turbolinks"=>false}) %>
             </div>
         <% end %>
     </div>

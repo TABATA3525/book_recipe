@@ -12,11 +12,11 @@
           <div id="feeling_search">
             <% if @feeling_category_ids.empty? %>
               <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, {include_blank: "読後感を選択して下さい"}, {id: "feeling_stars"} %>が
-              <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください" %>
+              <%= f.select "dummy_stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください" %>
             <% end %>
             <% @feeling_category_ids.each_with_index do |feeling_category_id, index| %>
               <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "読後感を選択して下さい",selected: feeling_category_id %>が
-              <%= f.select "stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください", selected: @stars[index] %>
+              <%= f.select "dummy_stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください", selected: @stars[index] %>
             <% end %>
           </div>
           <%= f.submit "検索" %>
@@ -24,13 +24,13 @@
       </div>
     </div>
   </div>
-  <% if @userBooks.blank? %>
-    <div class="user-book-search-blank">
-      検索条件に一致する本がありません。
-    </div>
-  <% else %>
-    <div class="user-books-index container">
-      <div class="row">
+  <div class="user-books-index container">
+    <div class="row">
+      <% if @userBooks.blank? %>
+        <div class="user-book-search-blank col-md-6 col-md-offset-3">
+          検索条件に一致する本がありません。
+        </div>
+      <% else %>
         <% @userBooks.each do |userBook| %>
             <div class="col-md-6 col-md-offset-3">
               <div class="user-book-index-single">
@@ -48,7 +48,7 @@
               </div>
             </div>
         <% end %>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
