@@ -1,48 +1,40 @@
 <template>
   <div>
-    <div class="star-container" v-for="(feeling, index) in feelingCategories" :key="index" >
-      <!-- setRatingから送られてきた星の数のデータを受け取って、railsに送信する体裁を整えている -->
-      <input type="hidden" :ref="'hidden_stars_'+index" name="user_book[user_feeling_category_star][]" :id="'user_book_user_feeling_category_stars_'+index">
-      <select v-html="feeling.innerHTML" name="user_book[feeling_category_id][]">
-      </select>
+    <div class="feeling-index-container" v-for="(feeling, index) in feelingCategories" :key="index" >
       <star-rating @rating-selected ="setRating" v-model="star.rating[index]"></star-rating>
-      <v-icon @click="addFeelingCategory" class="plus" large>mdi-plus-circle</v-icon>
-      <!-- feelingが複数表示されている時のみ、消去ボタンを表示 -->
-      <v-icon v-if="index !== 0" @click="deleteFeelingCategory(index)" class="minus" large>mdi-minus-circle</v-icon>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'stars',
+  name: 'feelingStars',
   data: function () {
     return {
       // 星の数のデータ
       star: {
         rating: []
       },
-      // 読後感のフォーマット情報とデータ
       feelingCategories: []
     }
   },
   async mounted() {
-    // 登録されている星の数のデータを取得
-    let default_star_elements = document.getElementsByName('user_feeling_categories[stars]');
-    // railsで作った読後感のフォーマットを取得
-    let feeling_category_element = document.getElementById('user_book_feeling_category_ids');
-    feeling_category_element.hidden = true;
-    console.log(default_star_elements)
-    // 登録されている星データのセット数分、読後感のフォーマットHTMLをそのままvueに入れている。
+    // 登録されている星
+    let default_star_elements = document.getElementsByClassName("feeling_stars[]");
+    // 読後感
+    let feeling_category_elements = document.getElementsByClassName('feeling_reading[]');
+    feeling_category_elements.hidden = true;
+
+    console.log(feeling_category_elements.textContent);
     for(let index=0; index<default_star_elements.length; index++) 
     {
       this.feelingCategories.push({
-        innerHTML: feeling_category_element.innerHTML
+        innerHTML: feeling_category_elements.innerHTML
       })
     };
+    console.log(this.feelingCategories);
     this.setRatingInit();
     this.setAfterReadingInit();
-    console.log(this.feelingCategories);
   },
   updated() {
     this.setRating()

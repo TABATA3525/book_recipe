@@ -1,4 +1,5 @@
 <%= javascript_pack_tag 'feeling_stars_search_vue' %>
+<%= javascript_pack_tag 'feeling_index_vue' %>
 
 <div class="user-books-index-wrapper">
   <div class="user-book-search container">
@@ -40,11 +41,27 @@
                 <div class="user-book-show">
                   <h3><%= userBook.title %></h3>
                   <p><%= userBook.author %></p>
+                  <div class="category">
+                    <% userBook.categories.each do |category| %>
+                      <button type="button" class="btn btn-success"><%= category.category_name %></button>
+                    <% end %>
+                  </div>
                   <br>
+                  <div class="feeling_category">
+                    <label>読後感</label>
+                    <% userBook.feeling_categories.each_with_index do |feeling_category, index| %>
+                      <p class="feeling_reading[]" id="feeling_after_<%= index %>"><%= feeling_category.feeling_after_reading %></p>
+                    <% end %>
+                    <% userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
+                      <p class="feeling_stars[]" id="feeling_stars_<%= index %>"><%= user_feeling_category.stars %></p>
+                    <% end %>
+                  </div>
+                  <div class="feeling_after"></div>
                   <p><%= userBook.feeling %></p>
                 </div>
-                <%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false %>
-                <%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？" } %>
+                <feeling-stars></feeling-stars>
+                <%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false, class: "btn btn-default edit" %>
+                <%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？"},  class: "btn btn-default delete" %>
               </div>
             </div>
         <% end %>

@@ -16,35 +16,35 @@
 
   <body>
     <header>
+    <% if user_signed_in? %>
       <nav class="navbar navbar-default navbar-transparent">
         <div class="container">
           <%= link_to root_path do %>
             <span><%= image_tag 'logo2-3.png', class:"logo" %></span>
           <% end %>
-          <ul class="nav navbar-nav navbar-right">
-            <% if user_signed_in? %>
-              <li>
-                <p><%= current_user.name %></p>
-              </li>
-              <li>
-                <%= link_to '登録した本の一覧・検索', user_books_path, data: {"turbolinks"=>false} %>
-              </li>
-              <li>
-                <%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %>
-              </li>
-              <li>
-                <%= link_to 'カテゴリーの追加・編集', categories_index_url %>
-              </li>
-              <li>
-                <%= link_to '読後感の追加・編集', feeling_categories_index_url %>
-              </li>
-              <li>
-                <%= link_to 'ログアウト', destroy_user_session_url, method: :delete %>
-              </li>
-            <% end %>
+          <ul class="nav navbar-nav navbar-right">           
+            <li>
+              <p><%= current_user.name %></p>
+            </li>
+            <li>
+              <%= link_to '登録した本の一覧・検索', user_books_path, data: {"turbolinks"=>false} %>
+            </li>
+            <li>
+              <%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %>
+            </li>
+            <li>
+              <%= link_to 'カテゴリーの編集', categories_index_url %>
+            </li>
+            <li>
+              <%= link_to '読後感の編集', feeling_categories_index_url %>
+            </li>
+            <li>
+              <%= link_to 'ログアウト', destroy_user_session_url, method: :delete %>
+            </li>  
           </ul>
         </div>
       </nav>
+    <% end %>
     </header>
     <%= yield %>
   </body>

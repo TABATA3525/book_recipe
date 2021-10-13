@@ -9,6 +9,7 @@ body {
       background-color: transparent;
       border-style: solid;
       padding: 1px 2px;
+      border-radius: 5px;
     }
   
     button, input, optgroup, select, textarea {
@@ -16,13 +17,9 @@ body {
     }
   
     input {
-        border-radius: 0;
+        border-radius: 5px;
     }
-  }
- 
-  .after-reading-container {
-    display: flex;
-  }
+}
 
 header {
   .navbar-transparent {
@@ -40,21 +37,6 @@ header {
   }
 }
 
-.btn-green {
-  font-family: Work Sans;
-  color: rgb(119, 110, 110);
-  border: 1px solid #fff;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  font-size: 20px;
-  background-color: rgba(68, 192, 48, 0.6);
-  ;
-
-  &:hover {
-    color: #fff;
-  }
-}
-
 .top-hero-wrapper {
   width: 100vw;
   height: 100vh;
@@ -63,25 +45,96 @@ header {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-color: #292828;
+
+  .text-white {
+    color: #FBFDE4;
+    text-shadow: 1px 1px 0 #8e8f7e,
+                 -1px 1px 0 #8e8f7e,
+                 1px -1px 0 #8e8f7e,
+                 -1px -1px 0 #8e8f7e;
+  }
+
+  .btn-green {
+    font-family: Work Sans;
+    color: rgb(119, 110, 110);
+    border: 1px solid #fff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+    background-color: rgba(68, 192, 48, 0.6);
+  
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .top-hero-container {
+    padding-top: 220px;
+    h1 {
+      font-size: 80px;
+      line-height: 1;
+      font-family: 'Bitter', serif;
+      color: rgba(68, 192, 48, 0.8);
+      margin-bottom: 50px;
+      text-shadow: 1px 1px 1px rgba(54, 163, 37, 0.9);
+    }
+    h3 {
+      margin-bottom: 60px;
+    }
+  }
 }
 
-.top-hero-container h1{
-  font-size: 80px;
-  line-height: 1;
-  font-family: 'Bitter', serif;
-  color: rgba(68, 192, 48, 0.8);;
-}
-
-.text-white {
-  color: #FBFDE4;
-}
 
 .hidden {
   display: none;
 }
 
-.user-book-index-single img{
-  float: left;
-  margin: 0 10px 10px 0;
+.user-books-index {
+  .user-book-index-single img {
+    float: left;
+    margin: 0 10px 10px 0;
+  }
+  .user-book-index-single {
+    background-color: #FBFDE4;
+    border-radius: 5px;
+  }
+
+  .feeling_category {
+    clear: left;
+  }
+  
+  .btn-default {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #fff;
+    width: 120px;
+    height: 40px;
+    line-height: 28px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.4em
+  }
+
+  .edit {
+    background-color: rgba(68, 192, 48, 0.62);
+    
+    &:hover {
+      background-color: rgba(68, 192, 48, 0.8);
+    }
+  }    
+
+  .delete {
+    background-color: rgba(46, 115, 131, 0.65);
+
+    &:hover {
+      background-color: rgba(46, 115, 131, 0.8);
+    }
+  }
 }
+
+.user-book-edit-wrapper {
+  .after-reading-container {
+    display: flex;
+  }
+}
+

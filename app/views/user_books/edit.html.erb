@@ -25,11 +25,13 @@
                 <label>読後感</label><br>
                 <div class="after-reading-container">
                     <div id="star_input"></div>
+                    <%# 読後感フォーマット。id名は'user_book_feeling_category_ids'に変換される。%>
                     <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "選択して下さい" %>
 
                     <% if @userBook.user_feeling_categories.empty? %>
                         <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: 1 %>
                     <% end %>
+                    <%# 既に複数登録されていたデータがあった時や、登録情報を変更される時に使用。starsのid名は'user_feeling_categories[stars]'に変換される。%>
                     <% @userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
                         <%= hidden_field :user_feeling_categories, :stars, id: "star_value#{index}", value: user_feeling_category.stars %>
                         <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, 
