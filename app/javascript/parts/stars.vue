@@ -5,7 +5,7 @@
       <input type="hidden" :ref="'hidden_stars_'+index" name="user_book[user_feeling_category_star][]" :id="'user_book_user_feeling_category_stars_'+index">
       <select v-html="feeling.innerHTML" name="user_book[feeling_category_id][]">
       </select>
-      <star-rating @rating-selected ="setRating" v-model="star.rating[index]"></star-rating>
+      <star-rating @rating-selected ="setRating" v-model="star.rating[index]" :star-size=40 :padding=10></star-rating>
       <v-icon @click="addFeelingCategory" class="plus" large>mdi-plus-circle</v-icon>
       <!-- feelingが複数表示されている時のみ、消去ボタンを表示 -->
       <v-icon v-if="index !== 0" @click="deleteFeelingCategory(index)" class="minus" large>mdi-minus-circle</v-icon>

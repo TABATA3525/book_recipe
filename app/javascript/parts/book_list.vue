@@ -64,6 +64,7 @@ export default {
       return items;
     },
     changeBooks: async function(){
+      // data内のsearchとresults
       var value = this.search;
       if (value == ''){
         this.results = ''

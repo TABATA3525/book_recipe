@@ -1,92 +1,50 @@
 <template>
-  <div>
-    <div class="feeling-index-container" v-for="(feeling, index) in feelingCategories" :key="index" >
-      <star-rating @rating-selected ="setRating" v-model="star.rating[index]"></star-rating>
-    </div>
+  <div class="star-container">
+    {{feelingAfterReading}}
+    <star-rating :read-only="true" :rating = "stars" :star-size=40 :padding=10></star-rating>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'feelingStars',
+  name: 'simple',
+  props: {
+      prop_stars: String,
+      prop_feeling_category_id: String,
+      prop_feeling_after_reading: String
+    },
   data: function () {
     return {
       // 星の数のデータ
-      star: {
-        rating: []
-      },
-      feelingCategories: []
-    }
+      stars: 0,
+      feelingCategoryId: [],
+      feelingCategories: [],
+      feelingAfterReading: ''
+      }
   },
-  async mounted() {
-    // 登録されている星
-    let default_star_elements = document.getElementsByClassName("feeling_stars[]");
-    // 読後感
-    let feeling_category_elements = document.getElementsByClassName('feeling_reading[]');
-    feeling_category_elements.hidden = true;
+  mounted() {
+    axios
+      //GETリクエストでRailsで作成したjsonを取得する
+      .get('/api/v1/feeling_categories.json')
+      //response.data は RailsのUser.select(:id, :name, :email)
+      //これをdata()で定義したusersに代入する
+      .then(response => (this.feelingCategories = response.data))
 
-    console.log(feeling_category_elements.textContent);
-    for(let index=0; index<default_star_elements.length; index++) 
-    {
-      this.feelingCategories.push({
-        innerHTML: feeling_category_elements.innerHTML
-      })
-    };
-    console.log(this.feelingCategories);
-    this.setRatingInit();
-    this.setAfterReadingInit();
-  },
-  updated() {
-    this.setRating()
-  },
-  methods: {
-    setRating: function(){
-      let refs = this.$refs
-      // 星の数が変更・クリックされた時に、dataのstar.ratingに入ってきた数値を、ref対応しているinputに渡している。
-      this.star.rating.forEach(function(element,index){
-        let property = "hidden_stars_"+index;
-        console.log(property)
-        refs[property][0].value = element
-      });
-    },
-    setRatingInit: function(){
-      // 既に登録されている星の数のデータを渡している。
-      let default_star_elements = document.getElementsByName('user_feeling_categories[stars]');
-      let that = this
-      default_star_elements.forEach(function(element,index){
-        that.star.rating[index] = Number(element.value);
-      });
-    },
-    setAfterReadingInit: function(){
-      // 既に登録されている読後感のフォーマットとデータを渡している。
-      let default_after_reading_elements = document.getElementsByClassName('user_feeling_categories[feeling_after_readings]');
-      let that = this;
-      Array.prototype.forEach.call(default_after_reading_elements, function(element, index) {
-        that.feelingCategories[index].innerHTML = element.innerHTML;
-      });
-    },
-    addFeelingCategory () {
-      let feeling_category_element = document.getElementById('user_book_feeling_category_ids');
-      this.feelingCategories.push({
-        innerHTML: feeling_category_element.innerHTML
-      })
-    },
-    deleteFeelingCategory(index) {
-      // 星をクリックすると、setRatingが走り、星の数のデータが変更されて渡される。変更された星の数のデータも削除する。
-      this.star.rating.splice(index, 1);
-      // 指定されたindexの要素を1つ削除します。
-      this.feelingCategories.splice(index, 1)
-    }
-  },
+    console.log(this.prop_stars);
+    this.stars = Number(this.prop_stars)
+    console.log(this.stars);
+    console.log(this.prop_feeling_category_id);
+    this.feelingCategoryId = Number(this.prop_feeling_category_id);
+    console.log(this.feelingCategoryId);
+    this.feelingAfterReading = this.prop_feeling_after_reading;
+  }
 }
 </script>
 
 <style>
   .star-container {
     display: flex;
-  }
-  
-  .plus {
-    margin-left: 20px;
   }
 </style>

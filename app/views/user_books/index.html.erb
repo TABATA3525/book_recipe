@@ -43,20 +43,17 @@
                   <p><%= userBook.author %></p>
                   <div class="category">
                     <% userBook.categories.each do |category| %>
-                      <button type="button" class="btn btn-success"><%= category.category_name %></button>
+                      <%= link_to category.category_name, search_path(category_ids: category.id), class:"btn btn-success" %>
                     <% end %>
                   </div>
                   <br>
                   <div class="feeling_category">
                     <label>読後感</label>
-                    <% userBook.feeling_categories.each_with_index do |feeling_category, index| %>
-                      <p class="feeling_reading[]" id="feeling_after_<%= index %>"><%= feeling_category.feeling_after_reading %></p>
-                    <% end %>
                     <% userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
-                      <p class="feeling_stars[]" id="feeling_stars_<%= index %>"><%= user_feeling_category.stars %></p>
+                      <div class="feeling_after" data-stars="<%= user_feeling_category.stars %>" 
+                        data-feeling-category-id="<%= user_feeling_category.feeling_category_id %>" data-feeling-after-reading="<%= user_feeling_category.feeling_category.feeling_after_reading %>" ></div>
                     <% end %>
                   </div>
-                  <div class="feeling_after"></div>
                   <p><%= userBook.feeling %></p>
                 </div>
                 <feeling-stars></feeling-stars>
