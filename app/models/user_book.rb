@@ -5,14 +5,13 @@ class UserBook < ApplicationRecord
   has_many :categories, through: :user_categories
   has_many :user_feeling_categories, dependent: :destroy
   has_many :feeling_categories, through: :user_feeling_categories
-  
+
   def self.search(keyword, category_ids, feeling_category_ids, stars, current_user)
-    # 後日、見直した！スッキリ！
     query = self.order(id: 'DESC')
     query = query.where(["(title like ? OR author like ?)", "%#{keyword}%", "%#{keyword}%"]) if keyword.present?
     query = query.left_joins(:categories).where(["categories.id = ?", category_ids]) if category_ids.present?
     user_book_ids = UserBook.where(user_id: current_user.id).pluck(:id)
-    if feeling_category_ids.present?
+    if feeling_category_ids&.first&.present?
       feeling_category_ids.each_with_index do |feeling_category_id, index|
         feeling_category_query = query.left_joins(:feeling_categories).where(["feeling_categories.id = ?", feeling_category_id]) 
         if stars[index] == "stars_5"

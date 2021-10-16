@@ -2,14 +2,14 @@
   <div>
     <div v-for="(feeling, index) in feelingCategoryIds" :key="index" >
       <select v-model="feelingCategoryIds[index]" name="feeling_category_ids[]">
-        <option value="" >読後感を選択して下さい</option>
+        <option value="">読後感</option>
         <option v-for="feelingCategory in feelingCategories" :key="feelingCategory.id" :value="feelingCategory.id">
           {{feelingCategory.feeling_after_reading}}
         </option>
       </select>
       が
       <select v-model="stars[index]" name="stars[]">
-        <option value="">選択してください</option>
+        <option value="">☆の数を選択してください</option>
         <option value="stars_5">☆５のみ</option>
         <option value="stars_4">☆４のみ</option>
         <option value="stars_3">☆３のみ</option>
@@ -19,6 +19,8 @@
         <option value="stars_low">低評価（☆２以下）</option>
       </select>
       <span><v-icon @click="addFeelingCategory" class="plus" large color="green accent-3">mdi-plus-circle</v-icon></span>
+      <v-icon v-if="index !== 0" @click="deleteFeelingCategory(index)" class="minus" large>mdi-minus-circle</v-icon>
+
     </div>
   </div>
 </template>
@@ -30,9 +32,9 @@ export default {
   name: 'feeling_stars',
   data: function () {
     return {
-      // feeling_categories_controllerで取得したjsonデータ
+      // feeling_categories_controllerで取得した登録されている読後感全てのjsonデータ
       feelingCategories: [],
-      // railsで取得したデフォルトのデータ
+      // railsで選択されたデータ
       feelingCategoryIds: [],
       stars: []
     }
@@ -50,6 +52,7 @@ export default {
     let feeling_category_element = document.getElementById('feeling_search');
     feeling_category_element.hidden = true;
 
+    // 取得した読後感と星の数値をvueに渡している
     for(let index=0; index<default_feeling_elements.length; index++) 
     {
       this.feelingCategoryIds.push(default_feeling_elements[index].value)
@@ -59,6 +62,10 @@ export default {
   methods: {
     addFeelingCategory () {
       this.feelingCategoryIds.push({ })
+    },
+    deleteFeelingCategory(index) {
+      // 指定されたindexの要素を1つ削除します。
+      this.feelingCategoryIds.splice(index, 1)
     }
   },
 }
