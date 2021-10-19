@@ -25,7 +25,9 @@
       </div>
     </div>
   </div>
-  <div class="user-books-index container">
+</div>
+<div class="user-book-results wrapper">
+  <div class="container">
     <div class="row">
       <% if @userBooks.blank? %>
         <div class="user-book-search-blank col-md-6 col-md-offset-3">
@@ -33,34 +35,35 @@
         </div>
       <% else %>
         <% @userBooks.each do |userBook| %>
-            <div class="col-md-6 col-md-offset-3">
-              <div class="user-book-index-single">
-                  <% if userBook.user_book_image.present? %>
-                    <%= image_tag userBook.user_book_image %>
+          <div class="col-md-6 col-md-offset-3">
+            <div class="user-book-index-single">
+                <% if userBook.user_book_image.present? %>
+                  <%= image_tag userBook.user_book_image %>
+                <% end %>
+              <div class="user-book-show">
+                <h3><%= userBook.title %></h3>
+                <p><%= userBook.author %></p>
+                <div class="category">
+                  <% userBook.categories.each do |category| %>
+                    <%= link_to category.category_name, search_path(category_ids: category.id), class:"btn btn-success", data: {"turbolinks"=>false} %>
                   <% end %>
-                <div class="user-book-show">
-                  <h3><%= userBook.title %></h3>
-                  <p><%= userBook.author %></p>
-                  <div class="category">
-                    <% userBook.categories.each do |category| %>
-                      <%= link_to category.category_name, search_path(category_ids: category.id), class:"btn btn-success" %>
-                    <% end %>
-                  </div>
-                  <br>
-                  <div class="feeling_category">
-                    <label>読後感</label>
-                    <% userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
-                      <div class="feeling_after" data-stars="<%= user_feeling_category.stars %>" 
-                        data-feeling-category-id="<%= user_feeling_category.feeling_category_id %>" data-feeling-after-reading="<%= user_feeling_category.feeling_category.feeling_after_reading %>" ></div>
-                    <% end %>
-                  </div>
-                  <p><%= userBook.feeling %></p>
                 </div>
-                <feeling-stars></feeling-stars>
-                <%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false, class: "btn btn-default edit" %>
-                <%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？"},  class: "btn btn-default delete" %>
+                <br>
+                <div class="feeling_category">
+                  <label>読後感</label>
+                  <% userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
+                    <div class="feeling_after" data-stars="<%= user_feeling_category.stars %>" 
+                      data-feeling-category-id="<%= user_feeling_category.feeling_category_id %>" 
+                      data-feeling-after-reading="<%= user_feeling_category.feeling_category.feeling_after_reading %>" >
+                    </div>
+                  <% end %>
+                </div>
+                <p><%= userBook.feeling %></p>
               </div>
+              <%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false, class: "btn btn-default edit" %>
+              <%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？"},  class: "btn btn-default delete" %>
             </div>
+          </div>
         <% end %>
       <% end %>
     </div>

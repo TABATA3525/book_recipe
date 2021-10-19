@@ -21,21 +21,7 @@ body {
     }
 }
 
-header {
-  .navbar-transparent {
-    margin-bottom: 0px;
-    background-color: #F6FFBD;
 
-    .logo {
-      padding: 0px;
-      margin-top: 15px;
-    }
-  
-    img {
-      height: 40px;
-    }
-  }
-}
 
 .top-hero-wrapper {
   width: 100vw;
@@ -89,7 +75,7 @@ header {
   display: none;
 }
 
-.user-books-index {
+.user-book-results {
   .user-book-index-single img {
     float: left;
     margin: 0 10px 10px 0;
