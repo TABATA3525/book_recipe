@@ -9,6 +9,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet">
@@ -17,31 +18,37 @@
   <body>
     <header>
     <% if user_signed_in? %>
-      <nav class="navbar navbar-default navbar-transparent">
-        <div class="container">
-          <%= link_to root_path do %>
-            <span><%= image_tag 'logo2-3.png', class:"logo" %></span>
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#F6FFBD;">
+        <div class="container-fluid">
+          <%= link_to root_path, class: 'navbar-brand' do %>
+            <span><%= image_tag 'logo2-3.png', class: "logo　img-fluid", alt: "", width: "240", height: "53.5" %></span>
           <% end %>
-          <ul class="nav navbar-nav navbar-right">           
-            <li>
-              <p><%= current_user.name %></p>
-            </li>
-            <li>
-              <%= link_to '登録した本の一覧・検索', user_books_path, data: {"turbolinks"=>false} %>
-            </li>
-            <li>
-              <%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %>
-            </li>
-            <li>
-              <%= link_to 'カテゴリーの編集', categories_index_url %>
-            </li>
-            <li>
-              <%= link_to '読後感の編集', feeling_categories_index_url %>
-            </li>
-            <li>
-              <%= link_to 'ログアウト', destroy_user_session_url, method: :delete %>
-            </li>  
-          </ul>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
+              <li class="nav-item">
+                <span class="navbar-text d-inline-block align-top"><%= current_user.name %></span>
+              </li>
+              <li class="nav-item">
+                <%= link_to '登録した本の一覧・検索', user_books_path, data: {"turbolinks"=>false}, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false}, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'カテゴリーの編集', categories_index_url, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '読後感の編集', feeling_categories_index_url, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ログアウト', destroy_user_session_url, method: :delete, class: 'nav-link' %>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     <% end %>

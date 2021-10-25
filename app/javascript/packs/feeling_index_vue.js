@@ -13,8 +13,6 @@ Vue.component('star-rating', StarRating);
 document.addEventListener('DOMContentLoaded', () => {
   var elements = document.getElementsByClassName('feeling_after');
   for(var i = 0; i < elements.length; i++){
-    console.log(elements[i].dataset.stars);
-    console.log(elements[i].dataset.feelingCategoryId);
     const feelingStarsIndex = new Vue({
       vuetify,
       render: h => h(FeelingIndex, 

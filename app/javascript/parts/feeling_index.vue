@@ -1,6 +1,8 @@
 <template>
   <div class="star-container">
-    {{feelingAfterReading}}
+    <div class="single-feeling">
+      {{feelingAfterReading}}
+    </div>
     <star-rating :read-only="true" :rating = "stars" :star-size=40 :padding=10></star-rating>
   </div>
 </template>
@@ -32,12 +34,8 @@ export default {
       //これをdata()で定義したusersに代入する
       .then(response => (this.feelingCategories = response.data))
 
-    console.log(this.prop_stars);
     this.stars = Number(this.prop_stars)
-    console.log(this.stars);
-    console.log(this.prop_feeling_category_id);
     this.feelingCategoryId = Number(this.prop_feeling_category_id);
-    console.log(this.feelingCategoryId);
     this.feelingAfterReading = this.prop_feeling_after_reading;
   }
 }
@@ -46,5 +44,12 @@ export default {
 <style>
   .star-container {
     display: flex;
+    margin-top: 10px;
   }
+
+  .single-feeling {
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+
 </style>
