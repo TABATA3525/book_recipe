@@ -9,7 +9,7 @@
       </select>
       が
       <select v-model="stars[index]" name="stars[]">
-        <option value="">☆の数を選択してください</option>
+        <option value="">☆の数</option>
         <option value="stars_5">☆５のみ</option>
         <option value="stars_4">☆４のみ</option>
         <option value="stars_3">☆３のみ</option>
@@ -61,7 +61,8 @@ export default {
   },
   methods: {
     addFeelingCategory () {
-      this.feelingCategoryIds.push({ })
+      this.feelingCategoryIds.push( "" )
+      this.stars.push( "" )
     },
     deleteFeelingCategory(index) {
       // 指定されたindexの要素を1つ削除します。
@@ -77,6 +78,6 @@ export default {
   }
   
   .plus {
-    margin-left: 20px;
+    margin-left: 5px;
   }
 </style>

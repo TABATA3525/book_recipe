@@ -54,7 +54,7 @@
                   <% userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
                     <div class="feeling_after" data-stars="<%= user_feeling_category.stars %>" 
                       data-feeling-category-id="<%= user_feeling_category.feeling_category_id %>" 
-                      data-feeling-after-reading="<%= user_feeling_category.feeling_category.feeling_after_reading %>" >
+                      data-feeling-after-reading="<%= user_feeling_category.feeling_category&.feeling_after_reading %>" >
                     </div>
                   <% end %>
                 </div>

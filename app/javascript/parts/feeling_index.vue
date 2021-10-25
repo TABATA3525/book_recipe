@@ -1,6 +1,8 @@
 <template>
   <div class="star-container">
-    {{feelingAfterReading}}
+    <div class="single-feeling">
+      {{feelingAfterReading}}
+    </div>
     <star-rating :read-only="true" :rating = "stars" :star-size=40 :padding=10></star-rating>
   </div>
 </template>
@@ -42,5 +44,12 @@ export default {
 <style>
   .star-container {
     display: flex;
+    margin-top: 10px;
   }
+
+  .single-feeling {
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+
 </style>
