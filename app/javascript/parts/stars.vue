@@ -3,7 +3,7 @@
     <div class="star-container" v-for="(feeling, index) in feelingCategories" :key="index" >
       <!-- setRatingから送られてきた星の数のデータを受け取って、railsに送信する体裁を整えている -->
       <input type="hidden" :ref="'hidden_stars_'+index" name="user_book[user_feeling_category_star][]" :id="'user_book_user_feeling_category_stars_'+index">
-      <select v-html="feeling.innerHTML" name="user_book[feeling_category_id][]">
+      <select v-html="feeling.innerHTML" required name="user_book[feeling_category_id][]">
       </select>
       <star-rating @rating-selected ="setRating" v-model="star.rating[index]" :star-size=40 :padding=10></star-rating>
       <v-icon @click="addFeelingCategory" class="plus" large>mdi-plus-circle</v-icon>
