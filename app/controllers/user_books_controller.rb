@@ -63,6 +63,7 @@ class UserBooksController < ApplicationController
     if user_book_update_params[:feeling_category_id].present?
       @userBook.user_feeling_categories.destroy_all
       user_book_update_params[:feeling_category_id].each_with_index do |feeling_category_id, index|
+        next if feeling_category_id.blank?
         @userFeelingCategory = UserFeelingCategory.new(
           user_book_id: @userBook.id
         )
