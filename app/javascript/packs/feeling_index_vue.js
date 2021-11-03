@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var elements = document.getElementsByClassName('feeling_after');
   for(var i = 0; i < elements.length; i++){
     const feelingStarsIndex = new Vue({
-      vuetify,
+      vuetify: vuetify,
       render: h => h(FeelingIndex, 
       { props: { prop_stars: elements[i].dataset.stars,
                  prop_feeling_category_id: elements[i].dataset.feelingCategoryId,
