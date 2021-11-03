@@ -6,7 +6,11 @@ import 'vuetify/dist/vuetify.min.css';
 import '@mdi/font/css/materialdesignicons.css'
 
 Vue.use(Vuetify); // 追加
-const vuetify = new Vuetify(); // 追加
+const vuetify = new Vuetify({
+  icons: {
+    iconfont: 'mdi', // 追加
+  },
+}); // 追加
 
 Vue.component('star-rating', StarRating);
 
@@ -14,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var elements = document.getElementsByClassName('feeling_after');
   for(var i = 0; i < elements.length; i++){
     const feelingStarsIndex = new Vue({
-      vuetify,
+      vuetify: vuetify,
       render: h => h(FeelingIndex, 
       { props: { prop_stars: elements[i].dataset.stars,
                  prop_feeling_category_id: elements[i].dataset.feelingCategoryId,
