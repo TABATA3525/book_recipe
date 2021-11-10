@@ -61,3 +61,4 @@ gem 'devise'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'bootstrap'
+gem "aws-sdk-s3", require: false
