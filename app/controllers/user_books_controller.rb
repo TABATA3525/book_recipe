@@ -16,7 +16,6 @@ class UserBooksController < ApplicationController
     @category_ids = params[:category_ids]
     @feeling_category_ids = params[:feeling_category_ids] ||= []
     @stars = params[:stars] ||= []
-    render "index"
   end
   
   def new

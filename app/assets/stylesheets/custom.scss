@@ -124,3 +124,19 @@ body {
   }
 }
 
+@media screen and (max-width:480px) { 
+  .top-hero-wrapper {
+    .top-hero-container {
+      padding-top: 70px;
+      h1 {
+        font-size: 60px;
+        line-height: 1;
+        margin-bottom: 50px;
+      }
+      h3 {
+        margin-bottom: 30px;
+      }
+    }
+  }
+  
+}

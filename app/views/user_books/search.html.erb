@@ -1,0 +1,78 @@
+<%= javascript_pack_tag 'feeling_stars_search_vue' %>
+<%= javascript_pack_tag 'feeling_index_vue' %>
+
+<%= link_to '登録した本の検索', search_path, class:"btn btn-success", data: {"turbolinks"=>false} %>
+<%= link_to '登録した本の一覧', user_books_path, class:"btn btn-success", data: {"turbolinks"=>false} %>
+
+<div class="user-books-index-wrapper">
+  <div class="user-book-search container">
+    <div class="row">
+      <div class="search-form col-md-6 col-md-offset-3">
+        <h1>登録した本の検索</h1>
+        <%= form_with url: search_path, method: :get, local: true do |f| %>
+          <%= f.text_field :keyword, value: @keyword, placeholder: "タイトル・著者名" %><br>
+          <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "カテゴリーを選択して下さい", selected: @category_ids %><br>
+          <% # feeling_starsはfeeling_search.vueにて読後感と星の数の選択画面を表示している %>
+          <div id="feeling_stars"></div>
+          <% # 以下はrubyで作ったフォーマットをvueに渡している。hidden扱い。%>
+          <div id="feeling_search">
+            <% if @feeling_category_ids.empty? %>
+              <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, {include_blank: "読後感を選択して下さい"}, {id: "feeling_stars"} %>が
+              <%= f.select "dummy_stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください" %>
+            <% end %>
+            <% @feeling_category_ids.each_with_index do |feeling_category_id, index| %>
+              <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "読後感を選択して下さい",selected: feeling_category_id %>が
+              <%= f.select "dummy_stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください", selected: @stars[index] %>
+            <% end %>
+          </div>
+          <%= button_tag :type => "submit", :class =>"btn btn-default" do %>
+            <i class="fa fa-search"></i>検索
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="user-book-results wrapper">
+  <div class="container">
+    <div class="row">
+      <% if @userBooks.blank? %>
+        <div class="user-book-search-blank col-md-6 col-md-offset-3">
+          検索条件に一致する本がありません。
+        </div>
+      <% else %>
+        <% @userBooks.each do |userBook| %>
+          <div class="col-md-6 col-md-offset-3">
+            <div class="user-book-index-single">
+                <% if userBook.user_book_image.present? %>
+                  <%= image_tag userBook.user_book_image %>
+                <% end %>
+              <div class="user-book-show">
+                <h3><%= userBook.title %></h3>
+                <p><%= userBook.author %></p>
+                <div class="category">
+                  <% userBook.categories.each do |category| %>
+                    <%= link_to category.category_name, search_path(category_ids: category.id), class:"btn btn-success", data: {"turbolinks"=>false} %>
+                  <% end %>
+                </div>
+                <br>
+                <div class="feeling_category">
+                  <label>読後感</label>
+                  <% userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
+                    <div class="feeling_after" data-stars="<%= user_feeling_category.stars %>" 
+                      data-feeling-category-id="<%= user_feeling_category.feeling_category_id %>" 
+                      data-feeling-after-reading="<%= user_feeling_category.feeling_category&.feeling_after_reading %>" >
+                    </div>
+                  <% end %>
+                </div>
+                <p><%= userBook.feeling %></p>
+              </div>
+              <%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false, class: "btn btn-default edit" %>
+              <%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？"},  class: "btn btn-default delete" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
