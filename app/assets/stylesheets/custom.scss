@@ -19,10 +19,18 @@ body {
     input {
         border-radius: 5px;
     }
+    
+    ul, li {
+      list-style-type: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
 }
 
 
-
+// topページ
 .top-hero-wrapper {
   width: 100vw;
   height: 100vh;
@@ -122,6 +130,32 @@ body {
   .after-reading-container {
     display: flex;
   }
+}
+
+.books-tabs {
+  margin-top: 40px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  
+}
+
+.books-tabs li {
+  float: left;
+}
+
+.books-tabs li.active {
+  border-bottom: 2px solid #3ecdc6;
+}
+
+.books-tabs li.active a {
+  color: #57575f;
+}
+
+.books-tabs a {
+  display: inline-block;
+  padding: 16px 30px;
+  color: #afb6bf;
 }
 
 @media screen and (max-width:480px) { 

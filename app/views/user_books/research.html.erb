@@ -1,8 +1,10 @@
 <%= javascript_pack_tag 'feeling_stars_search_vue' %>
 <%= javascript_pack_tag 'feeling_index_vue' %>
 
-<%= link_to '登録した本の検索', search_path, class:"btn btn-success", data: {"turbolinks"=>false} %>
-<%= link_to '登録した本の一覧', user_books_path, class:"btn btn-success", data: {"turbolinks"=>false} %>
+<ul class="books-tabs">
+  <li class="active"><%= link_to '登録した本の検索', search_path, data: {"turbolinks"=>false} %></li>
+  <li><%= link_to '登録した本の一覧', user_books_path, data: {"turbolinks"=>false} %></li>
+</ul>
 
 <div class="user-books-index-wrapper">
   <div class="user-book-search container">
