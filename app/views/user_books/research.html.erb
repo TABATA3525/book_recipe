@@ -2,8 +2,8 @@
 <%= javascript_pack_tag 'feeling_index_vue' %>
 
 <ul class="books-tabs">
-  <li><%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %></li>
-  <li class="active"><%= link_to '登録した本の一覧', user_books_path, data: {"turbolinks"=>false} %></li>
+  <li class="active"><%= link_to '登録した本の検索', search_path, data: {"turbolinks"=>false} %></li>
+  <li><%= link_to '登録した本の一覧', user_books_path, data: {"turbolinks"=>false} %></li>
 </ul>
 
 <div class="user-books-index-wrapper">
@@ -31,7 +31,6 @@
             <i class="fa fa-search"></i>検索
           <% end %>
         <% end %>
-        <%= link_to '検索条件をリセット', user_books_path, data: {"turbolinks"=>false} %>
       </div>
     </div>
   </div>

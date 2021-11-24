@@ -19,10 +19,18 @@ body {
     input {
         border-radius: 5px;
     }
+    
+    ul, li {
+      list-style-type: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
 }
 
 
-
+// topページ
 .top-hero-wrapper {
   width: 100vw;
   height: 100vh;
@@ -75,6 +83,7 @@ body {
   display: none;
 }
 
+// 本の一覧indexページ
 .user-book-results {
   .user-book-index-single img {
     float: left;
@@ -118,9 +127,77 @@ body {
   }
 }
 
+.books-tabs {
+  margin-top: 40px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  
+}
+
+.books-tabs li {
+  float: left;
+}
+
+.books-tabs li.active {
+  border-bottom: 2px solid #3ecdc6;
+}
+
+.books-tabs li.active a {
+  color: #57575f;
+}
+
+.books-tabs a {
+  display: inline-block;
+  padding: 16px 30px;
+  color: #afb6bf;
+}
+
+// 本のeditページ
 .user-book-edit-wrapper {
   .after-reading-container {
     display: flex;
   }
 }
 
+// 共通navbar
+.navbar-light .navbar-toggler {
+  border-color: rgba(0,0,0,0);
+}
+
+// 本のnewページ
+.user-book-new-wrapper {
+  .new-search-form {
+    padding: 10px;
+  }
+  h2 {
+    margin-bottom: 10px;
+  }
+  .new-search-result {
+    margin-top: 20px;
+    padding: 10px;
+  }
+
+  #error_message {
+    color: red;
+    margin-left: 20px;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width:480px) { 
+  .top-hero-wrapper {
+    .top-hero-container {
+      padding-top: 70px;
+      h1 {
+        font-size: 60px;
+        line-height: 1;
+        margin-bottom: 50px;
+      }
+      h3 {
+        margin-bottom: 30px;
+      }
+    }
+  }
+  
+}

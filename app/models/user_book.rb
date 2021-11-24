@@ -1,4 +1,5 @@
 class UserBook < ApplicationRecord
+  validates :title, uniqueness: { scope: :user }
   belongs_to :user
   has_one_attached :user_book_image
   has_many :user_categories, dependent: :destroy

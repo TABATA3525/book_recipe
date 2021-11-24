@@ -14,7 +14,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
   </head>
 
   <body>
@@ -35,10 +36,7 @@
                 <span class="navbar-text d-inline-block align-top"><%= current_user.name %></span>
               </li>
               <li class="nav-item">
-                <%= link_to '登録した本の一覧・検索', user_books_path, data: {"turbolinks"=>false}, class: 'nav-link' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false}, class: 'nav-link' %>
+                <%= link_to '本の登録・一覧', user_books_path, data: {"turbolinks"=>false}, class: 'nav-link' %>
               </li>
               <li class="nav-item">
                 <%= link_to 'カテゴリーの編集', categories_index_url, class: 'nav-link' %>

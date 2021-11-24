@@ -1,5 +1,10 @@
 <%= javascript_pack_tag "hello_vue" %>
 
+<ul class="books-tabs">
+  <li class="active"><%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %></li>
+  <li><%= link_to '登録した本の一覧', user_books_path, data: {"turbolinks"=>false} %></li>
+</ul>
+
 <%= form_with url: user_books_path, id: 'bookForm' do |form| %>
   
 <% end %>
