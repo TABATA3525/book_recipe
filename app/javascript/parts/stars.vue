@@ -5,10 +5,20 @@
       <input type="hidden" :ref="'hidden_stars_'+index" name="user_book[user_feeling_category_star][]" :id="'user_book_user_feeling_category_stars_'+index">
       <select v-html="feeling.innerHTML" required name="user_book[feeling_category_id][]">
       </select>
-      <star-rating @rating-selected ="setRating" v-model="star.rating[index]" :star-size=40 :padding=10></star-rating>
-      <v-icon @click="addFeelingCategory" class="plus" large>mdi-plus-circle</v-icon>
+      <star-rating @rating-selected ="setRating" v-model="star.rating[index]" :show-rating="false" :star-size=40 :padding=10></star-rating>
+      <v-btn 
+        class="mx-2"
+        fab
+        dark
+        small
+        color="primary"
+      >
+        <v-icon dark @click="addFeelingCategory" class="plus">
+          mdi-plus
+        </v-icon>
+      </v-btn>
       <!-- feelingが複数表示されている時のみ、消去ボタンを表示 -->
-      <v-icon v-if="index !== 0" @click="deleteFeelingCategory(index)" class="minus" large>mdi-minus-circle</v-icon>
+      <v-icon v-if="index !== 0" @click="deleteFeelingCategory(index)" class="minus" size=30>mdi-minus-circle</v-icon>
     </div>
   </div>
 </template>
@@ -94,7 +104,11 @@ export default {
     display: flex;
   }
   
-  .plus {
-    margin-left: 20px;
+  @media screen and (max-width:480px) { 
+    .vue-star-rating-star {
+      height: 30px;
+      width: 30px;
+    }
   }
+
 </style>

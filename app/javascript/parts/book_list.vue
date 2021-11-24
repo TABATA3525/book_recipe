@@ -9,6 +9,7 @@
           </div>
           <div class="new-search-result">
             <h2 class='mb8'>検索結果</h2>
+            <div id="error_message"></div>
             <div id='$results' v-for="(result, index) in results">
               <a class='f border bg-white mb8' :href="result.link" target='_blank'>
                 {{ result.title }}
@@ -87,6 +88,7 @@ export default {
       data.append("user_book_image", urlString);
       console.log(data.get('title'));
       const headers = { "content-type": "multipart/form-data" };
+      const that = this
       this.$http
       .post(
         '/user_books',
@@ -95,8 +97,17 @@ export default {
       ).then(response => {
         window.location.href='/user_books'
       }).catch(function(error) {
-        window.location.href='/user_books'
+        // window.location.href='/user_books'
+        console.log(error);
+        console.log(error.response);
+        console.log(error.response.data.message);
+        that.scroll_to_top();
+        console.log(document.getElementById("error_message"))
+        document.getElementById("error_message").innerHTML= error.response.data.message
       });
+    },
+    scroll_to_top: function(){
+      window.scroll({top: 0, behavior: 'smooth'});
     }
   }
 }

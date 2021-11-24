@@ -83,6 +83,7 @@ body {
   display: none;
 }
 
+// 本の一覧indexページ
 .user-book-results {
   .user-book-index-single img {
     float: left;
@@ -126,12 +127,6 @@ body {
   }
 }
 
-.user-book-edit-wrapper {
-  .after-reading-container {
-    display: flex;
-  }
-}
-
 .books-tabs {
   margin-top: 40px;
   background-color: white;
@@ -156,6 +151,38 @@ body {
   display: inline-block;
   padding: 16px 30px;
   color: #afb6bf;
+}
+
+// 本のeditページ
+.user-book-edit-wrapper {
+  .after-reading-container {
+    display: flex;
+  }
+}
+
+// 共通navbar
+.navbar-light .navbar-toggler {
+  border-color: rgba(0,0,0,0);
+}
+
+// 本のnewページ
+.user-book-new-wrapper {
+  .new-search-form {
+    padding: 10px;
+  }
+  h2 {
+    margin-bottom: 10px;
+  }
+  .new-search-result {
+    margin-top: 20px;
+    padding: 10px;
+  }
+
+  #error_message {
+    color: red;
+    margin-left: 20px;
+    margin-bottom: 30px;
+  }
 }
 
 @media screen and (max-width:480px) { 
