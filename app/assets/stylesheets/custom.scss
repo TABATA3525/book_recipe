@@ -31,6 +31,28 @@ body {
 
 
 // topページ
+.btn-green {
+  font-family: Work Sans;
+  color: rgb(119, 110, 110);
+  border: 1px solid #fff;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 20px;
+  background-color: rgba(68, 192, 48, 0.6);
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.text-white {
+  color: #FBFDE4;
+  text-shadow: 1px 1px 0 #8e8f7e,
+               -1px 1px 0 #8e8f7e,
+               1px -1px 0 #8e8f7e,
+               -1px -1px 0 #8e8f7e;
+}
+
 .top-hero-wrapper {
   width: 100vw;
   height: 100vh;
@@ -39,28 +61,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-
-  .text-white {
-    color: #FBFDE4;
-    text-shadow: 1px 1px 0 #8e8f7e,
-                 -1px 1px 0 #8e8f7e,
-                 1px -1px 0 #8e8f7e,
-                 -1px -1px 0 #8e8f7e;
-  }
-
-  .btn-green {
-    font-family: Work Sans;
-    color: rgb(119, 110, 110);
-    border: 1px solid #fff;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    font-size: 20px;
-    background-color: rgba(68, 192, 48, 0.6);
-  
-    &:hover {
-      color: #fff;
-    }
-  }
 
   .top-hero-container {
     padding-top: 220px;
@@ -75,6 +75,40 @@ body {
     h3 {
       margin-bottom: 60px;
     }
+  }
+}
+
+// ユーザーログイン、新規登録ページ
+.form-control {
+  height: 45px;
+}
+
+.users-new-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-image: image-url('top-image.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+
+  .users-new-container {
+    padding-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+
+    h1{
+      margin-bottom: 20px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+  }
+  .btn-green {
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 }
 
@@ -140,7 +174,7 @@ body {
 }
 
 .books-tabs li.active {
-  border-bottom: 2px solid #3ecdc6;
+  border-bottom: 2px solid #69dd33;
 }
 
 .books-tabs li.active a {
@@ -163,25 +197,64 @@ body {
 // 共通navbar
 .navbar-light .navbar-toggler {
   border-color: rgba(0,0,0,0);
+  outline: none;
 }
 
 // 本のnewページ
 .user-book-new-wrapper {
-  .new-search-form {
+  .row {
     padding: 10px;
   }
+
   h2 {
     margin-bottom: 10px;
-  }
-  .new-search-result {
-    margin-top: 20px;
-    padding: 10px;
   }
 
   #error_message {
     color: red;
     margin-left: 20px;
     margin-bottom: 30px;
+  }
+  
+  .new-search-results {
+    margin-top: 20px;
+    padding: 10px;
+    .user-book-result-single {
+      background-color: #FBFDE4;
+      border-radius: 5px;
+
+      p {
+        margin-bottom: 0rem;
+      }
+
+      img {
+        float: left;
+        margin: 0 10px 10px 0;
+      }
+
+      .submit {
+        clear: left;
+      }
+
+      .btn-default {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        color: #fff;
+        width: 120px;
+        height: 40px;
+        line-height: 28px;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.4em
+      }
+      .registration {
+        background-color: rgba(68, 192, 48, 0.62);
+        
+        &:hover {
+          background-color: rgba(68, 192, 48, 0.8);
+        }
+      } 
+    }
   }
 }
 
