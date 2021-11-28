@@ -7,22 +7,37 @@
             <h2>本の新規登録</h2>
             <input v-model="search" class='input bg-white mb16' type='search' @input="changeBooks" placeholder="本のタイトル・著者名">
           </div>
-          <div class="new-search-result">
-            <h2 class='mb8'>検索結果</h2>
-            <div id="error_message"></div>
-            <div id='$results' v-for="(result, index) in results">
-              <a class='f border bg-white mb8' :href="result.link" target='_blank'>
-                {{ result.title }}
-              </a>
-              <input :id="'title' + index" type='hidden' :value="result.title" name="title">
-              <img :id="'image'+ index" class='w100 object-fit-contain bg-gray' :src="result.image">
-              <div v-for="author in result.authors">
-                {{ author }}
+        </div>
+      </div>
+    </div>
+    <div class="container">  
+      <div class="row">
+        <div class="new-search-results">
+          <h2 class='mb8'>検索結果</h2>
+          <div id="error_message"></div>
+          <div id='$results' v-for="(result, index) in results">
+            <div class="col-md-9 col-md-offset-3">
+              <div class="user-book-result-single">
+                <img :id="'image'+ index" class='w100 object-fit-contain bg-gray' :src="result.image">
+                <div class="user-book-result-show">
+                  <h3>
+                    <a class='f border bg-white mb8' :href="result.link" target='_blank'>
+                      {{ result.title }}
+                    </a>
+                  </h3>
+                  <input :id="'title' + index" type='hidden' :value="result.title" name="title">
+                  <p>著者</p>
+                  <p v-for="author in result.authors">
+                    {{ author }}
+                  </p>
+                  <input :id="'author' + index" type="hidden" :value="result.authors" name="author">
+                </div>
+                <div class="submit">
+                  <button type="button" @click="createBook(index)" class="btn btn-default registration">新規登録する</button>
+                </div>
               </div>
-              <input :id="'author' + index" type="hidden" :value="result.authors" name="author">
-              <button type="button" @click="createBook(index)">登録する</button>
-            </div> 
-          </div>
+            </div>
+          </div> 
         </div>
       </div>
     </div>
@@ -98,11 +113,7 @@ export default {
         window.location.href='/user_books'
       }).catch(function(error) {
         // window.location.href='/user_books'
-        console.log(error);
-        console.log(error.response);
-        console.log(error.response.data.message);
         that.scroll_to_top();
-        console.log(document.getElementById("error_message"))
         document.getElementById("error_message").innerHTML= error.response.data.message
       });
     },

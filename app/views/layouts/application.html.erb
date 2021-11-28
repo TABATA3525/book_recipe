@@ -52,6 +52,12 @@
         </div>
       </nav>
     <% end %>
+    <% if notice %>
+    　　<p><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p><%= alert %></p>
+    <% end %>
     </header>
     <%= yield %>
   </body>

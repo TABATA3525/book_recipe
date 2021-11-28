@@ -5,13 +5,12 @@
       <input type="hidden" :ref="'hidden_stars_'+index" name="user_book[user_feeling_category_star][]" :id="'user_book_user_feeling_category_stars_'+index">
       <select v-html="feeling.innerHTML" required name="user_book[feeling_category_id][]">
       </select>
-      <star-rating @rating-selected ="setRating" v-model="star.rating[index]" :show-rating="false" :star-size=40 :padding=10></star-rating>
+      <star-rating @rating-selected="setRating" v-model="star.rating[index]" :show-rating="false" :star-size=40 :padding=10></star-rating>
       <v-btn 
         class="mx-2"
         fab
         dark
         small
-        color="primary"
       >
         <v-icon dark @click="addFeelingCategory" class="plus">
           mdi-plus
@@ -102,6 +101,16 @@ export default {
 <style>
   .star-container {
     display: flex;
+  }
+  .star-container .theme--dark.v-btn.v-btn--has-bg {
+    background-color: rgba(68, 192, 48, 0.62);
+    border: none;
+    outline: none;
+  }
+
+  .star-container .v-icon {
+    border: none;
+    outline: none;
   }
   
   @media screen and (max-width:480px) { 
