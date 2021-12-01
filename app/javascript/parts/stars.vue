@@ -99,17 +99,6 @@ export default {
 </script>
 
 <style>
-  .star-container {
-    display: flex;
-  }
-
   
-  
-  @media screen and (max-width:480px) { 
-    .vue-star-rating-star {
-      height: 30px;
-      width: 30px;
-    }
-  }
 
 </style>
