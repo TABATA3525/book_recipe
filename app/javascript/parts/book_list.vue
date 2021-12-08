@@ -33,7 +33,7 @@
                   <input :id="'author' + index" type="hidden" :value="result.authors" name="author">
                 </div>
                 <div class="submit">
-                  <button type="button" @click="createBook(index)" class="btn btn-default registration">新規登録する</button>
+                  <button type="button" @click="createBook(index)" class="btn btn-default edit">新規登録</button>
                 </div>
               </div>
             </div>
