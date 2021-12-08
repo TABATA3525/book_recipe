@@ -97,27 +97,3 @@ export default {
   },
 }
 </script>
-
-<style>
-  .star-container {
-    display: flex;
-  }
-  .star-container .theme--dark.v-btn.v-btn--has-bg {
-    background-color: rgba(68, 192, 48, 0.62);
-    border: none;
-    outline: none;
-  }
-
-  .star-container .v-icon {
-    border: none;
-    outline: none;
-  }
-  
-  @media screen and (max-width:480px) { 
-    .vue-star-rating-star {
-      height: 30px;
-      width: 30px;
-    }
-  }
-
-</style>

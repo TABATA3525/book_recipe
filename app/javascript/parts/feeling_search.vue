@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(feeling, index) in feelingCategoryIds" :key="index" >
+    <div v-for="(feeling, index) in feelingCategoryIds" :key="index" class="star-container">
       <select v-model="feelingCategoryIds[index]" name="feeling_category_ids[]">
         <option value="">読後感</option>
         <option v-for="feelingCategory in feelingCategories" :key="feelingCategory.id" :value="feelingCategory.id">
@@ -18,9 +18,22 @@
         <option value="stars_high">高評価（☆３以上）</option>
         <option value="stars_low">低評価（☆２以下）</option>
       </select>
-      <span><v-icon @click="addFeelingCategory" class="plus" large color="green accent-3">mdi-plus-circle</v-icon></span>
-      <v-icon v-if="index !== 0" @click="deleteFeelingCategory(index)" class="minus" large>mdi-minus-circle</v-icon>
-
+      <v-btn 
+      class="mx-2"
+      fab
+      dark
+      small
+      >
+        <v-icon dark @click="addFeelingCategory" class="plus">mdi-plus</v-icon>
+      </v-btn>
+      <v-btn 
+      class="mx-2 minus"
+      fab
+      dark
+      small 
+      v-if="index !== 0" @click="deleteFeelingCategory(index)" >
+        <v-icon>mdi-minus</v-icon>
+      </v-btn>
     </div>
   </div>
 </template>
@@ -72,12 +85,3 @@ export default {
 }
 </script>
 
-<style>
-  .star-container {
-    display: flex;
-  }
-  
-  .plus {
-    margin-left: 5px;
-  }
-</style>
