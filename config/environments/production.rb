@@ -111,7 +111,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { host: 'pacific-harbor-80572.herokuapp.com', port: 443 }
+  config.action_mailer.default_url_options = { host: 'https://pacific-harbor-80572.herokuapp.com' }
 
   config.action_mailer.delivery_method = :smtp
 
@@ -125,7 +125,7 @@ Rails.application.configure do
     :authentication => 'login'
   }
   
-  host = 'pacific-harbor-80572.herokuapp.com'
+  host = 'https://pacific-harbor-80572.herokuapp.com'
   Rails.application.routes.default_url_options[:host] = host
 
 end
