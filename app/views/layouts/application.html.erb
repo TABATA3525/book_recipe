@@ -24,7 +24,7 @@
       <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#F6FFBD;">
         <div class="container-fluid">
           <%= link_to root_path, class: 'navbar-brand' do %>
-            <span><%= image_tag 'logo2-3.png', class: "logo　img-fluid", alt: "", width: "240", height: "53.5" %></span>
+            <span><%= image_tag 'logo2-3.png', class: "logo img-fluid", alt: "", width: "240", height: "53.5" %></span>
           <% end %>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -52,13 +52,16 @@
         </div>
       </nav>
     <% end %>
-    <% if notice %>
-    　　<p><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p><%= alert %></p>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>" role="alert"><%= value %></div>
     <% end %>
     </header>
     <%= yield %>
+
+    <script>
+      $(function(){
+        $(".alert").fadeOut(5000);
+      });
+    </script>
   </body>
 </html>

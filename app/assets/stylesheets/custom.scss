@@ -294,9 +294,7 @@ body {
 // 読後感の追加アイコン
 .star-container {
   display: flex;
-  .feeling_category_form {
-    margin: 3px;
-  }
+  margin: 10px 0;
 
   .theme--dark.v-btn.v-btn--has-bg {
     background-color: rgba(68, 192, 48, 0.62);
