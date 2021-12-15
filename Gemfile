@@ -63,3 +63,4 @@ gem 'jquery-rails'
 gem 'bootstrap'
 gem "aws-sdk-s3", require: false
 gem 'rails-i18n'
+gem 'dotenv-rails'

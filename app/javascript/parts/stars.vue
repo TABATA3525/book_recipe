@@ -3,9 +3,9 @@
     <div class="star-container" v-for="(feeling, index) in feelingCategories" :key="index" >
       <!-- setRatingから送られてきた星の数のデータを受け取って、railsに送信する体裁を整えている -->
       <input type="hidden" :ref="'hidden_stars_'+index" name="user_book[user_feeling_category_star][]" :id="'user_book_user_feeling_category_stars_'+index">
-      <select v-html="feeling.innerHTML" required name="user_book[feeling_category_id][]">
+      <select v-html="feeling.innerHTML" required name="user_book[feeling_category_id][]" class="feeling_category_form">
       </select>
-      <star-rating @rating-selected="setRating" v-model="star.rating[index]" :show-rating="false" :star-size=40 :padding=10></star-rating>
+      <star-rating @rating-selected="setRating" v-model="star.rating[index]" :show-rating="false" :star-size=40 :padding= 5></star-rating>
       <v-btn 
         class="mx-2"
         fab
@@ -17,7 +17,15 @@
         </v-icon>
       </v-btn>
       <!-- feelingが複数表示されている時のみ、消去ボタンを表示 -->
-      <v-icon v-if="index !== 0" @click="deleteFeelingCategory(index)" class="minus" size=30>mdi-minus-circle</v-icon>
+      <v-btn 
+        class="minus"
+        fab
+        dark
+        small
+        v-if="index !== 0"
+      >
+        <v-icon @click="deleteFeelingCategory(index)" dark>mdi-minus</v-icon>
+      </v-btn>
     </div>
   </div>
 </template>

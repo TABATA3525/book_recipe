@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
       vuetify: vuetify,
       render: h => h(FeelingIndex, 
       { props: { prop_stars: elements[i].dataset.stars,
-                 prop_feeling_category_id: elements[i].dataset.feelingCategoryId,
                  prop_feeling_after_reading: elements[i].dataset.feelingAfterReading }
       })
     }).$mount()

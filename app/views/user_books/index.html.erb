@@ -51,6 +51,7 @@
                   <%= image_tag userBook.user_book_image %>
                 <% end %>
               <div class="user-book-show">
+                <p class="create_date"><%= userBook.created_at.strftime('%Y年%m月%d日') %></p>
                 <h3><%= userBook.title %></h3>
                 <p><%= userBook.author %></p>
                 <div class="category">
@@ -63,12 +64,13 @@
                   <label>読後感</label>
                   <% userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
                     <div class="feeling_after" data-stars="<%= user_feeling_category.stars %>" 
-                      data-feeling-category-id="<%= user_feeling_category.feeling_category_id %>" 
                       data-feeling-after-reading="<%= user_feeling_category.feeling_category&.feeling_after_reading %>" >
                     </div>
                   <% end %>
                 </div>
-                <p><%= userBook.feeling %></p>
+                <div class="feeling">
+                  <%= simple_format(userBook.feeling) %>
+                </div>
               </div>
               <%= link_to "編集", edit_user_book_path(userBook), "data-turbolinks": false, class: "btn btn-default edit" %>
               <%= link_to "削除", userBook, method: :delete, data: { confirm: "削除してもよろしいですか？"},  class: "btn btn-default delete" %>
