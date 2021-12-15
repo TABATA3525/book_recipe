@@ -111,6 +111,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.8.1)
     ffi (1.15.3)
@@ -299,6 +303,7 @@ DEPENDENCIES
   byebug (= 11.0.1)
   capybara (= 3.28.0)
   devise
+  dotenv-rails
   jbuilder (= 2.9.1)
   jquery-rails
   listen (= 3.1.5)

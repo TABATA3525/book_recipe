@@ -148,6 +148,7 @@ body {
   }
   #category_ids {
     width: 100%;
+    margin-bottom: 10px;
   }
 }
 .search {
@@ -166,11 +167,27 @@ body {
   .user-book-index-single {
     background-color: #FBFDE4;
     border-radius: 5px;
-  }
-
-  .feeling_category {
-    clear: left;
-  }
+    .create_date {
+      float: right;
+    }
+    h3 {
+      clear: right;
+    }
+    .feeling_category {
+      clear: left;
+      .single-feeling {
+        width: 360px;
+        td {
+          width: 110px;
+          text-align: center;
+          vertical-align: middle;
+        }
+      }
+    }
+    .feeling p{
+      margin: 30px 10px;
+    }    
+  }  
 
   // 削除ボタン
   .delete {
@@ -212,6 +229,11 @@ body {
 .user-book-edit-wrapper {
   .after-reading-container {
     display: flex;
+  }
+  #user_book_feeling {
+    width: 100%;
+    height: 150px;
+    line-height: normal;
   }
 }
 
@@ -272,6 +294,9 @@ body {
 // 読後感の追加アイコン
 .star-container {
   display: flex;
+  .feeling_category_form {
+    margin: 3px;
+  }
 
   .theme--dark.v-btn.v-btn--has-bg {
     background-color: rgba(68, 192, 48, 0.62);
@@ -282,8 +307,8 @@ body {
     border: none;
     outline: none;
   }
-  .minus .theme--dark.v-btn.v-btn--has-bg {
-    background-color: blue;
+  .minus.theme--dark.v-btn.v-btn--has-bg {
+    background-color: rgb(106, 141, 159);
   }
 }
 
