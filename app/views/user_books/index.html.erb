@@ -2,8 +2,14 @@
 <%= javascript_pack_tag 'feeling_index_vue' %>
 
 <ul class="books-tabs">
-  <li><%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %></li>
-  <li class="active"><%= link_to '登録した本の一覧', user_books_path, data: {"turbolinks"=>false} %></li>
+  <li>
+    <%= link_to new_user_book_path, data: {"turbolinks"=>false} do %>
+      本の新規登録<i class="fas fa-plus-circle"></i>
+    <% end %>
+  </li>
+  <li class="active">
+    <%= link_to '登録した本', user_books_path, data: {"turbolinks"=>false} %>
+  </li>
 </ul>
 
 <div class="user-books-index-wrapper">
@@ -20,11 +26,11 @@
           <div id="feeling_search">
             <% if @feeling_category_ids.empty? %>
               <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, {include_blank: "読後感を選択して下さい"}, {id: "feeling_stars"} %>が
-              <%= f.select "dummy_stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください" %>
+              <%= f.select "dummy_stars[]", [["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"],["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"]], include_blank: "選択してください" %>
             <% end %>
             <% @feeling_category_ids.each_with_index do |feeling_category_id, index| %>
               <%= f.collection_select "dummy_ids[]", FeelingCategory.where(user_id: current_user.id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, include_blank: "読後感を選択して下さい",selected: feeling_category_id %>が
-              <%= f.select "dummy_stars[]", [["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"],["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"]], include_blank: "選択してください", selected: @stars[index] %>
+              <%= f.select "dummy_stars[]", [["高評価（☆３以上）", "stars_high"],["低評価（☆２以下）", "stars_low"],["☆５のみ", "stars_5"],["☆４のみ", "stars_4"], ["☆３のみ", "stars_3"],["☆２のみ", "stars_2"],["☆１のみ", "stars_1"]], include_blank: "選択してください", selected: @stars[index] %>
             <% end %>
           </div>
           <%= button_tag :type => "submit", :class =>"btn btn-default search" do %>
