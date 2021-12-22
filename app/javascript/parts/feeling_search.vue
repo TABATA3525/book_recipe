@@ -1,7 +1,11 @@
 <template>
   <div>
     <div v-for="(feeling, index) in feelingCategoryIds" :key="index" class="star-container">
-      <select v-model="feelingCategoryIds[index]" name="feeling_category_ids[]">
+      <select 
+        v-model="feelingCategoryIds[index]" 
+        name="feeling_category_ids[]"
+        :required="stars[index] ? true : false"
+      >
         <option value="">読後感</option>
         <option v-for="feelingCategory in feelingCategories" :key="feelingCategory.id" :value="feelingCategory.id">
           {{feelingCategory.feeling_after_reading}}
@@ -10,13 +14,13 @@
       が
       <select v-model="stars[index]" name="stars[]">
         <option value="">☆の数</option>
+        <option value="stars_high">高評価（☆３以上）</option>
+        <option value="stars_low">低評価（☆２以下）</option>
         <option value="stars_5">☆５のみ</option>
         <option value="stars_4">☆４のみ</option>
         <option value="stars_3">☆３のみ</option>
         <option value="stars_2">☆２のみ</option>
         <option value="stars_1">☆１のみ</option>
-        <option value="stars_high">高評価（☆３以上）</option>
-        <option value="stars_low">低評価（☆２以下）</option>
       </select>
       <v-btn 
       class="mx-2"

@@ -5,7 +5,7 @@
         <div class="user-book-new-reserve col-md-6 col-md-offset-3">
           <div class="new-search-form">
             <h2>本の新規登録</h2>
-            <input v-model="search" class='input bg-white mb16' type='search' @input="changeBooks" placeholder="本のタイトル・著者名">
+            <input v-model="search" class='input bg-white mb16' type='search' @input="changeBooks" placeholder="本のタイトル・著者名を入力してください">
           </div>
         </div>
       </div>

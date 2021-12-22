@@ -19,6 +19,9 @@
             <div class="category">
                 <label>カテゴリー</label><br>
                 <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "選択して下さい" %>
+                <%= link_to categories_index_path(user_book: @userBook.id), "data-turbolinks": false, class: "btn btn-default edit" do %>
+                    カテゴリー名を編集する<%= image_tag 'pencil-plus.png'%>
+                <% end %>
             </div>
 
             <div class="feeling-after-reading">
@@ -26,7 +29,7 @@
                 <div class="after-reading-container">
                     <div id="star_input"></div>
                     <%# 読後感フォーマット。id名は'user_book_feeling_category_ids'に変換される。%>
-                    <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, {include_blank: "選択して下さい", selected: ""} %>
+                    <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, {include_blank: "読後感", selected: ""} %>
 
                     <% if @userBook.user_feeling_categories.empty? %>
                         <%= hidden_field :user_feeling_categories, :stars, id: "star_value", value: 1 %>
@@ -35,9 +38,14 @@
                     <% @userBook.user_feeling_categories.each_with_index do |user_feeling_category, index| %>
                         <%= hidden_field :user_feeling_categories, :stars, id: "star_value#{index}", value: user_feeling_category.stars %>
                         <%= f.collection_select :feeling_category_ids, FeelingCategory.where(user_id: @userBook.user_id).or(FeelingCategory.where(user_id: nil)).order(:user_id, :id), :id, :feeling_after_reading, 
-                            {include_blank: "選択して下さい",selected: user_feeling_category.feeling_category&.id}, { id: "feeling_after_reading#{index}", class: "user_feeling_categories[feeling_after_readings]", style: "display:none;" } %>
+                            {include_blank: "読後感",selected: user_feeling_category.feeling_category&.id}, { id: "feeling_after_reading#{index}", class: "user_feeling_categories[feeling_after_readings]", style: "display:none;" } %>
                     <% end %>
                 </div>
+                <div>
+                    <%= link_to feeling_categories_index_path(user_book: @userBook.id), "data-turbolinks": false, class: "btn btn-default edit" do %>
+                        読後感名を編集する<%= image_tag 'pencil-plus.png'%>
+                    <% end %> 
+                </div>   
             </div>
             <div class="feeling-container">
                 <label>感想</label><br>
@@ -47,7 +55,7 @@
             <div class="edit-submit"><%= f.submit "更新する" %></div>
 
             <div>
-                <%= link_to("戻る", user_books_path, data: {"turbolinks"=>false}) %>
+                <%= link_to("本の一覧ページに戻る", user_books_path, data: {"turbolinks"=>false}) %>
             </div>
         <% end %>
     </div>

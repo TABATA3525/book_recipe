@@ -30,6 +30,9 @@
           </div>
         <% end %>
       </div>
+      <% if params[:user_book] %>
+        <%= link_to "戻る", edit_user_book_path(params[:user_book]), data: {"turbolinks"=>false} %> 
+      <% end %>
       <%= link_to '登録した本の一覧', user_books_url, data: {"turbolinks"=>false} %>
     </div>
   </div>
