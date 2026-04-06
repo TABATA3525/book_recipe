@@ -3,6 +3,7 @@ class UserBooksController < ApplicationController
   require 'uri'
   before_action :authenticate_user!
   before_action :set_user_book, only: [:edit, :show, :destroy, :update]
+  before_action :set_category_options, only: [:index, :edit, :search]
   
   def index
     @userBooks = UserBook.where(user_id: current_user.id).order(id: 'DESC')
@@ -108,7 +109,11 @@ class UserBooksController < ApplicationController
   end
     
   def set_user_book
-    @userBook = UserBook.find(params[:id]) 
+    @userBook = current_user.user_books.find(params[:id]) 
+  end
+
+  def set_category_options
+    @category_options = Category.where(user_id: [nil, current_user.id]).order(:user_id, :id)
   end
   
 end

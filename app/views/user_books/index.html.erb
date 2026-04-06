@@ -19,7 +19,7 @@
         <h1>登録した本の検索</h1>
         <%= form_with url: search_path, method: :get, local: true do |f| %>
           <%= f.text_field :keyword, value: @keyword, placeholder: "タイトル・著者名" %><br>
-          <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "カテゴリーを選択して下さい", selected: @category_ids %><br>
+          <%= f.collection_select :category_ids, @category_options, :id, :category_name, include_blank: "カテゴリーを選択して下さい", selected: @category_ids %><br>
           <% # feeling_starsはfeeling_search.vueにて読後感と星の数の選択画面を表示している %>
           <div id="feeling_stars"></div>
           <% # 以下はrubyで作ったフォーマットをvueに渡している。hidden扱い。%>

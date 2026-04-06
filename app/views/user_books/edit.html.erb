@@ -18,7 +18,7 @@
             
             <div class="category">
                 <label>カテゴリー</label><br>
-                <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "選択して下さい" %>
+                <%= f.collection_select :category_ids, @category_options, :id, :category_name, include_blank: "選択して下さい" %>
                 <%= link_to categories_index_path(user_book: @userBook.id), "data-turbolinks": false, class: "btn btn-default edit" do %>
                     カテゴリー名を編集する<%= image_tag 'pencil-plus.png'%>
                 <% end %>
