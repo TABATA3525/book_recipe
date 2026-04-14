@@ -26,6 +26,7 @@ services:
     command: bash -lc "bundle install && bundle exec rails db:prepare && bundle exec rails server -b 0.0.0.0 -p 3000"
     volumes:
       - .:/rails
+      - bundle-data:/usr/local/bundle
     ports:
       - "3001:3000"
     depends_on:
@@ -36,3 +37,4 @@ services:
 
 volumes:
   mysql-data:
+  bundle-data:
