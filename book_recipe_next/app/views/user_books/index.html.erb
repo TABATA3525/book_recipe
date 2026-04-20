@@ -1,0 +1,18 @@
+<% content_for :description do %>マイページです。ユーザーの登録した本の情報の一覧を検索できます。<% end %>   
+<%= vite_client_tag %>
+<%= vite_javascript_tag 'feeling_index_vue' %>
+
+<div id="feeling-index"></div>
+
+<%#= javascript_pack_tag 'feeling_stars_search_vue' %>
+<%#= javascript_pack_tag 'feeling_index_vue' %>
+
+<ul class="books-tabs">
+  <li>
+    <%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %>
+  </li>
+  <li class="active">
+    <%= link_to 'マイページ', user_books_path, data: {"turbolinks"=>false} %>
+  </li>
+</ul>
+

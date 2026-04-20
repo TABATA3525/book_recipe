@@ -6,14 +6,15 @@ Rails.application.routes.draw do
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'home#top'
-  # resources :user_books
+  resources :user_books
   # post '/user_books/:id' => "user_books#update"
   
-  # get '/categories/index' => 'categories#index'
-  # get '/categories/:id/edit' => 'categories#edit', as: 'category_edit'
-  # post '/categories/create' => 'categories#create'
-  # post '/categories/update' => 'categories#update'
-  # delete '/categories/:id' => 'categories#destroy', as: 'category_destroy'
+  get '/categories/index' => 'categories#index'
+  get '/categories/new' => 'categories#new', as: 'new_category'
+  get '/categories/:id/edit' => 'categories#edit', as: 'category_edit'
+  post '/categories/create' => 'categories#create'
+  post '/categories/update' => 'categories#update'
+  delete '/categories/:id' => 'categories#destroy', as: 'category_destroy'
   
   # get '/feeling_categories/index' => 'feeling_categories#index'
   # get '/feeling_categories/:id/edit' => 'feeling_categories#edit', as: 'feeling_category_edit'
