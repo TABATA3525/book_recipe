@@ -1,5 +1,7 @@
 <% content_for :description do %>本の新規登録ページです。<% end %>   
-<%= javascript_pack_tag "hello_vue" %>
+
+<%= vite_client_tag %>
+<%= vite_javascript_tag 'book_search_vue' %>
 
 <ul class="books-tabs">
   <li class="active"><%= link_to '本の新規登録', new_user_book_path, data: {"turbolinks"=>false} %></li>

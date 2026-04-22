@@ -1,11 +1,4 @@
 <% content_for :description do %>マイページです。ユーザーの登録した本の情報の一覧を検索できます。<% end %>   
-<%= vite_client_tag %>
-<%= vite_javascript_tag 'feeling_index_vue' %>
-
-<div id="feeling-index"></div>
-
-<%#= javascript_pack_tag 'feeling_stars_search_vue' %>
-<%#= javascript_pack_tag 'feeling_index_vue' %>
 
 <ul class="books-tabs">
   <li>
@@ -16,3 +9,34 @@
   </li>
 </ul>
 
+<div class="container">
+  <% if @userBooks.present? %>
+    <% @userBooks.each do |user_book| %>
+      <div class="row">
+        <div class="col-md-9 col-md-offset-3">
+          <div class="user-book-result-single">
+            <% if user_book.user_book_image.attached? %>
+              <%= image_tag user_book.user_book_image, class: 'w100 object-fit-contain bg-gray' %>
+            <% end %>
+
+            <div class="user-book-result-show">
+              <h3><%= user_book.title %></h3>
+              <p>著者</p>
+              <p><%= user_book.author %></p>
+            </div>
+
+            <div class="submit">
+              <%= link_to '詳細・編集', edit_user_book_path(user_book), class: 'btn btn-default edit' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="row">
+      <div class="col-md-9 col-md-offset-3">
+        <p>登録されている本はまだありません。</p>
+      </div>
+    </div>
+  <% end %>
+</div>

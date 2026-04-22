@@ -1,0 +1,75 @@
+<% content_for :description do %>読後感の一覧・新規登録できるページです。<% end %>   
+
+<div class="feeling-categories-wrapper">
+  <div class="container">
+    <div class="feeling-categories-page">
+      <div class="feeling-categories-hero">
+        <p class="feeling-categories-kicker">Feeling Categories</p>
+        <h1>読後感を整理する</h1>
+        <p class="feeling-categories-lead">既存の読後感を確認しながら、よく使う表現を追加・編集できます。</p>
+      </div>
+
+      <div class="feeling-categories-grid">
+        <section class="feeling-categories-panel">
+          <div class="panel-header">
+            <h2>既存の読後感</h2>
+            <span class="panel-count"><%= @defaultFeelingCategories.size %>件</span>
+          </div>
+          <div class="tag-list">
+            <% @defaultFeelingCategories.each do |defaultFeelingCategory| %>
+              <span class="tag-chip tag-chip-default"><%= defaultFeelingCategory.feeling_after_reading %></span>
+            <% end %>
+          </div>
+        </section>
+
+        <section class="feeling-categories-panel">
+          <div class="panel-header">
+            <h2>自分の読後感を編集する</h2>
+            <span class="panel-count"><%= @feelingCategories.size %>件</span>
+          </div>
+          <div class="editable-list">
+            <% if @feelingCategories.present? %>
+              <% @feelingCategories.each do |feelingCategory| %>
+                <div class="editable-row">
+                  <div class="editable-content">
+                    <p class="editable-name"><%= feelingCategory.feeling_after_reading %></p>
+                  </div>
+                  <div class="editable-actions">
+                    <%= link_to "編集する", feeling_category_edit_path(feelingCategory.id), class: "btn btn-default edit" %>
+                    <%= button_to "削除する",
+                      feeling_categories_destroy_path(feelingCategory.id),
+                      method: :delete,
+                      class: "btn btn-default delete",
+                      data: { turbo_confirm: "削除してもよろしいですか？" } %>
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+              <p class="empty-state">まだ自分専用の読後感は登録されていません。</p>
+            <% end %>
+          </div>
+        </section>
+
+        <section class="feeling-categories-panel create-panel">
+          <div class="panel-header">
+            <h2>読後感を新規登録する</h2>
+          </div>
+          <%= form_tag(feeling_categories_create_path, method: :post, class: "create-feeling-category-form") do %>
+            <label class="form-label" for="feeling_after_reading">読後感名</label>
+            <input id="feeling_after_reading" type="text" name="feeling_after_reading" class="form-input" placeholder="例: じんわり沁みる">
+            <div class="create-button">
+              <input type="submit" value="新規登録する" class="btn btn-default edit">
+            </div>
+          <% end %>
+        </section>
+      </div>
+
+      <div class="page-links">
+        <% if params[:user_book] %>
+          <%= link_to "戻る", edit_user_book_path(params[:user_book]), data: {"turbolinks"=>false}, class: "page-link" %>
+        <% end %>
+        <%= link_to '登録した本の一覧', user_books_url, data: {"turbolinks"=>false}, class: "page-link" %>
+      </div>
+    </div>
+  </div>
+</div>

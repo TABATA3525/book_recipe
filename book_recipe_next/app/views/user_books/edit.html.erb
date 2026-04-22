@@ -1,5 +1,5 @@
 <% content_for :description do %>登録した本の編集ページです。読後感・カテゴリー・星評価・感想を登録する事ができます。<% end %>   
-<%= javascript_pack_tag 'star_vue' %>
+<%= vite_javascript_tag 'star_vue' %>
 <div class="user-book-edit-wrapper">
     <div class="container user-book-edit-form">
         <%= form_for(@userBook, url: user_book_path(@userBook)) do |f| %>

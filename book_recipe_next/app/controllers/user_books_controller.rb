@@ -29,11 +29,18 @@ class UserBooksController < ApplicationController
       author: user_book_params[:author],
       user_id: current_user.id
     )
-    user_book_image_parsed = URI.parse(user_book_params[:user_book_image])
-    if user_book_image_parsed.path != "/user_books/new"
-    # 画像があった場合
-      f = open user_book_params[:user_book_image]
-      @userBook.user_book_image.attach io: f, filename: File.basename(f)
+    image_url = user_book_params[:user_book_image]
+    if image_url.present?
+      user_book_image_parsed = URI.parse(image_url)
+      if user_book_image_parsed.is_a?(URI::HTTP) || user_book_image_parsed.is_a?(URI::HTTPS)
+        begin
+          file = URI.open(image_url)
+          filename = File.basename(user_book_image_parsed.path.presence || "book_image.jpg")
+          @userBook.user_book_image.attach(io: file, filename: filename)
+        rescue OpenURI::HTTPError, SocketError, URI::InvalidURIError
+          # 画像取得に失敗しても本の登録自体は継続する
+        end
+      end
     end
     if @userBook.save
       # 登録したら、カテゴリーと読後感の初期設定を『未登録』カテゴリーにしたい。
