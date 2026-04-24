@@ -29,10 +29,8 @@ export default {
       }
   },
   mounted() {
-    this.stars = 3
-    this.feelingAfterReading = "テスト"
-    // this.stars = Number(this.prop_stars)
-    // this.feelingAfterReading = this.prop_feeling_after_reading;
+    this.stars = Number(this.prop_stars)
+    this.feelingAfterReading = this.prop_feeling_after_reading;
   }
 }
 </script>
