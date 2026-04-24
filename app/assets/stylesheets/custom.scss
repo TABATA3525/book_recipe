@@ -12,7 +12,7 @@ body {
       border-radius: 5px;
     }
   
-    button, input, optgroup, select, textarea {
+    input, optgroup, select, textarea {
       font: inherit;
     }
 
@@ -71,6 +71,15 @@ body {
   }
 }
 
+// 削除ボタン
+.delete {
+  background-color: rgba(46, 115, 131, 0.65);
+  color: #fff;
+  &:hover {
+    background-color: rgba(46, 115, 131, 0.8);
+  }
+}
+
 // topページ
 .btn-green {
   font-family: Work Sans;
@@ -119,7 +128,7 @@ body {
   }
 }
 
-// ユーザーログイン、新規登録ページ
+// ユーザーログイン、新規登録ページ、パスワード再設定メール送信画面
 .form-control {
   height: 45px;
 }
@@ -146,6 +155,10 @@ body {
     .field {
       margin-bottom: 20px;
     }
+
+    .actions {
+      margin-bottom: 30px;
+    }
   }
   .btn-green {
     padding-top: 8px;
@@ -159,22 +172,93 @@ body {
 
 // 本のindexページ
 // 本の検索
+.accordion-title {
+  position: relative;
+  margin: 0;
+  padding: 0.625em 0.625em 0.625em 2em;
+  background-color: rgba(68, 192, 48, 0.8);
+  font-size: 1.25em;
+  font-weight: normal;
+  color: #fff;
+  cursor: pointer;
+}
+.accordion-title:hover,
+.accordion-title:active,
+.accordion-title.open { 
+  background-color: #00aaa7;
+}
+
+.accordion-title::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  width: 15px;
+  height: 2px;
+  /*縦線に*/
+  transform: rotate(90deg);
+  background: #fff;
+  transition: all .3s ease-in-out;
+}
+
+.accordion-title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  /*横線*/
+  width: 15px;
+  height: 2px;
+  background: #fff;
+  transition: all .2s ease-in-out;
+}
+
+.accordion-title.open::before {
+  transform: rotate(180deg);
+}
+
+.accordion-title.open::after {
+  opacity: 0;
+}
+
+.accordion-content {
+  display: none;
+  padding-left: 2.3125em;
+}
+
+
 .search-form {
   input {
     margin-top: 20px;
     margin-bottom: 10px;
     width: 100%;
   }
+
+  .error-message {
+    font-size: 12px;
+    color: #ff7676;
+    display: none; /* 非表示に */
+  }
+  /* :invalid時だけ隣の要素を表示 */
+  select:invalid + .error-message  {
+    display: block;
+    position: absolute;
+    top: -20px;
+  }
+
   #category_ids {
     width: 100%;
     margin-bottom: 10px;
   }
 }
 .search {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   background-color:#2E7383A6;
   color: #fff;
+}
+
+.search-reset {
+  display: block;
 }
 
 // 本の一覧
@@ -208,15 +292,8 @@ body {
     }    
   }  
 
-  // 削除ボタン
-  .delete {
-    background-color: rgba(46, 115, 131, 0.65);
-
-    &:hover {
-      background-color: rgba(46, 115, 131, 0.8);
-    }
-  }
 }
+
 
 .books-tabs {
   margin-top: 40px;
@@ -244,6 +321,27 @@ body {
   display: inline-block;
   padding: 16px 30px;
   color: #afb6bf;
+}
+
+.mypage-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 24px 0;
+
+  .button_to {
+    margin: 0;
+  }
+}
+
+.logout-button {
+  background-color: rgba(46, 115, 131, 0.65);
+  border: none;
+  color: #fff;
+
+  &:hover {
+    background-color: rgba(46, 115, 131, 0.8);
+    color: #fff;
+  }
 }
 
 // 本のeditページ
@@ -286,6 +384,33 @@ body {
 .user-book-new-wrapper {
   .row {
     padding: 10px;
+  }
+
+  #inputWrapper {
+    position: relative;
+    input {
+      padding-inline-start: 40px;
+      position: relative;
+    }
+    #icon {
+      position: absolute;
+      left: 12px;
+      top: 15px;
+      #container {
+        align-items: center;
+        border-radius: 8px;
+        display: flex;
+        height: 32px;
+        justify-content: center;
+        overflow: hidden;
+        width: 32px;
+        #image {
+          background-image: image-url('search.svg');
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
   }
 
   h2 {
@@ -333,7 +458,9 @@ body {
 // 読後感の追加アイコン
 .star-container {
   display: flex;
-  margin: 10px 0;
+  margin: 15px 0;
+  position: relative;
+  height: 40px;
 
   .theme--dark.v-btn.v-btn--has-bg {
     background-color: rgba(68, 192, 48, 0.62);
@@ -347,6 +474,11 @@ body {
   .minus.theme--dark.v-btn.v-btn--has-bg {
     background-color: rgb(106, 141, 159);
   }
+}
+
+.category-button {
+  width: 120px;
+  color: #fff;
 }
 
 @media screen and (max-width:480px) { 
