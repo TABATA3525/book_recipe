@@ -27,6 +27,16 @@
               <h3><%= user_book.title %></h3>
               <p>著者</p>
               <p><%= user_book.author %></p>
+              <div class="feeling_category">
+                <label>読後感</label>
+                <% user_book.user_feeling_categories.each do |ufc| %>
+                  <div
+                    class="feeling_after"
+                    data-stars="<%= ufc.stars %>"
+                    data-feeling-after-reading="<%= ufc.feeling_category&.feeling_after_reading %>">
+                  </div>
+                <% end %>
+              </div>
             </div>
 
             <div class="submit">
@@ -44,3 +54,5 @@
     </div>
   <% end %>
 </div>
+
+<%= vite_javascript_tag 'feeling_index_vue' %>

@@ -17,5 +17,4 @@ const mountBookSearch = () => {
   element.dataset.vueMounted = 'true'
 }
 
-document.addEventListener('DOMContentLoaded', mountBookSearch)
 document.addEventListener('turbo:load', mountBookSearch)
