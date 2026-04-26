@@ -29,9 +29,9 @@ RUN apt-get update -qq && \
     pkg-config \
     python-is-python3 \
     libyaml-dev
-    
+
 # Install JavaScript dependencies
-ARG NODE_VERSION=18.15.0
+ARG NODE_VERSION=22.22.2
 ARG YARN_VERSION=latest
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
