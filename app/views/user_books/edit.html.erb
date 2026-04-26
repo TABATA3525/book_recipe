@@ -1,4 +1,5 @@
-<%= javascript_pack_tag 'star_vue' %>
+<% content_for :description do %>登録した本の編集ページです。読後感・カテゴリー・星評価・感想を登録する事ができます。<% end %>   
+<%= vite_javascript_tag 'star_vue' %>
 <div class="user-book-edit-wrapper">
     <div class="container user-book-edit-form">
         <%= form_for(@userBook, url: user_book_path(@userBook)) do |f| %>
@@ -18,7 +19,7 @@
             
             <div class="category">
                 <label>カテゴリー</label><br>
-                <%= f.collection_select :category_ids, Category.all, :id, :category_name, include_blank: "選択して下さい" %>
+                <%= f.collection_select :category_ids, @category_options, :id, :category_name, include_blank: "選択して下さい" %>
                 <%= link_to categories_index_path(user_book: @userBook.id), "data-turbolinks": false, class: "btn btn-default edit" do %>
                     カテゴリー名を編集する<%= image_tag 'pencil-plus.png'%>
                 <% end %>
@@ -60,4 +61,3 @@
         <% end %>
     </div>
 </div>    
-

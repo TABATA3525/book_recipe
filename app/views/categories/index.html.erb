@@ -1,3 +1,5 @@
+<%= vite_javascript_tag 'modal_vue' %>
+<% content_for :description do %>登録されているカテゴリーの一覧ページです。カテゴリーの新規登録もできます。<% end %>   
 <div class="categories-wrapper">
   <div class="container">
     <div class="categories">
@@ -9,25 +11,30 @@
           </div>
         <% end %>
       </div>
-      
+      <%= link_to "カテゴリーを追加する", new_category_path, class: "btn btn-default category-button" %>
       <div class="edit-categories">  
         <h2>カテゴリーを編集する</h2>
-          <% @categories.each do |category| %>
-            <div>
-              <%= category.category_name %>
-              <%= link_to "編集する", category_edit_path(category.id) %> 
-              <%= link_to "削除する", category_destroy_path(category.id), method: :delete, data: { confirm: "削除してもよろしいですか？" } %>
-            </div>
-          <% end %>
+        <% @categories.each do |category| %>
+          <div>
+            <%= form_tag(categories_update_path, method: :post) do %>
+              <input type="text" name="category_name" value="<%= category.category_name %>">
+              <input type="hidden" name="category_id" value="<%= category.id %>">
+              <button type="submit">更新する</button>
+            <% end %>
+          </div>
+
+          <div>
+            <%= button_to "削除する",
+              category_destroy_path(category.id),
+              method: :delete,
+              data: { turbo_confirm: "削除してもよろしいですか？" } %>
+          </div>
+        <% end %>
       </div>
       
       <div class="create-category">
         <%= form_tag(categories_create_path, method: :post) do %>
-          <h2>カテゴリーを新規登録する</h2>
-          <input type="text" name="category_name">
-          <div class="create-botton">
-            <input type="submit" value="新規登録する">
-          </div>
+          <div id="modal-form"></div>
         <% end %>
       </div>
       <% if params[:user_book] %>

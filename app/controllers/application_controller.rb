@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::Base
   http_basic_authenticate_with :name => ENV['BASIC_AUTH_USERNAME'], :password => ENV['BASIC_AUTH_PASSWORD'] if Rails.env == "production"
 
-  def hello
-    render html: "hello, world!"
-  end
-
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters

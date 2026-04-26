@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/user_books/:id' => "user_books#update"
   
   get '/categories/index' => 'categories#index'
+  get '/categories/new' => 'categories#new', as: 'new_category'
   get '/categories/:id/edit' => 'categories#edit', as: 'category_edit'
   post '/categories/create' => 'categories#create'
   post '/categories/update' => 'categories#update'
