@@ -48,8 +48,11 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+# production:
+#   <<: *default
+#   database: book_recipe_next_production
+#   username: <%= ENV.fetch("MYSQL_USER", "book_recipe_next") %>
+#   password: <%= ENV["BOOK_RECIPE_NEXT_DATABASE_PASSWORD"] || ENV.fetch("MYSQL_PASSWORD", "password") %>
+
 production:
-  <<: *default
-  database: book_recipe_next_production
-  username: <%= ENV.fetch("MYSQL_USER", "book_recipe_next") %>
-  password: <%= ENV["BOOK_RECIPE_NEXT_DATABASE_PASSWORD"] || ENV.fetch("MYSQL_PASSWORD", "password") %>
+  url: <%= ENV['DATABASE_URL'] %>
