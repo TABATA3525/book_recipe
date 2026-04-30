@@ -29,5 +29,5 @@ const mountFeelingStarsSearch = () => {
   element.dataset.vueMounted = 'true'
 }
 
-document.addEventListener('DOMContentLoaded', mountFeelingStarsSearch)
+// document.addEventListener('DOMContentLoaded', mountFeelingStarsSearch)
 document.addEventListener('turbo:load', mountFeelingStarsSearch)
