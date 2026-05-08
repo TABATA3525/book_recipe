@@ -479,6 +479,28 @@ body {
 .category-button {
   width: 120px;
   color: #fff;
+  background-color: rgba(68, 192, 48, 0.62);
+
+  &:hover {
+    background-color: rgba(68, 192, 48, 0.8);
+  }
+}
+
+.category-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: rgba(68, 192, 48, 0.62);
+  color: #fff;
+  border-radius: 5px;
+
+  width: auto;
+  height: auto;
+  line-height: normal;
+  letter-spacing: normal;
+
+  &:hover {
+    background-color: rgba(68, 192, 48, 0.8);
+  }
 }
 
 @media screen and (max-width:480px) { 
