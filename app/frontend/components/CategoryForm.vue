@@ -1,7 +1,7 @@
 <template>
   <div class="example-modal-window">
     <p>ボタンを押すとモーダルウィンドウが開きます</p>
-    <button type="button" @click="openModal">カテゴリーを追加する</button>
+    <button class="btn btn-default category-button" type="button" @click="openModal">カテゴリーを追加する</button>
     <!-- コンポーネント MyModal -->
     <Modal @close="closeModal" v-if="modal">
       <!-- default スロットコンテンツ -->

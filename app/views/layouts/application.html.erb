@@ -1,27 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <title>BookRecipeNext</title>
+
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
-    <!--
-      If using a TypeScript entrypoint file:
-        vite_typescript_tag 'application'
 
-      If using a .jsx or .tsx entrypoint, add the extension:
-        vite_javascript_tag 'application.jsx'
-
-      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
-    -->
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet">
   </head>
 
   <body>
+    <header>
+      <% if user_signed_in? %>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#F6FFBD;">
+        <div class="container-fluid">
+          <%= link_to root_path, class: 'navbar-brand' do %>
+            <span><%= image_tag 'logo2-3.png', class: "logo img-fluid", alt: "", width: "240", height: "53.5" %></span>
+          <% end %>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
+              <li class="nav-item">
+                <span class="navbar-text d-inline-block align-top"><%= current_user.name %></span>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'カテゴリーの編集', categories_index_url, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '読後感の編集', feeling_categories_index_url, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ログアウト', destroy_user_session_url, method: :delete, class: 'nav-link' %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <% end %>
+
+      <% flash.each do |key, value| %>
+        <div class="flash-message">
+          <%= value %>
+        </div>
+      <% end %>
+    </header>
+
     <%= yield %>
   </body>
 </html>

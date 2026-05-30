@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      category: カテゴリー
+
+    attributes:
+      category:
+        category_name: カテゴリー名

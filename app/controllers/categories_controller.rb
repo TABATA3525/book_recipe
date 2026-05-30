@@ -21,12 +21,15 @@ class CategoriesController < ApplicationController
   end
   
   def create
-    @category = Category.find_or_initialize_by(
-      user_id: current_user.id,
-      category_name: categories_params[:category_name]
-      )
-    @category.save!
-    redirect_to categories_index_url
+    @category = Category.new(categories_params)
+    @category.user_id = current_user.id
+    if @category.save
+      redirect_to categories_index_url
+    else
+      @defaultCategories = Category.where(user_id: nil)
+      @categories = Category.where(user_id: current_user.id).order(:user_id, :id)
+      render :index, status: :unprocessable_entity
+    end
   end
   
   def destroy
