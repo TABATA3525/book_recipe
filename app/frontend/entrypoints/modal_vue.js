@@ -10,23 +10,10 @@ const vuetify = createVuetify({
   directives,
 })
 
-// const mountModalForm = () => {
-//   const app = createApp(CategoryForm)
-//   const element = document.getElementById('modal-form')
-//   if (!element || element.dataset.vueMounted === 'true') return
-
-//   app.use(vuetify)
-//   app.mount(element)
-//   element.dataset.vueMounted = 'true'
-// }
-
 const mountModalForm = () => {
-  console.log("mountModalForm called")
 
   const app = createApp(CategoryForm)
   const element = document.getElementById('modal-form')
-
-  console.log(element)
 
   if (!element || element.dataset.vueMounted === 'true') return
 
