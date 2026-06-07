@@ -11,16 +11,16 @@ const vuetify = createVuetify({
 })
 
 const mountModalForm = () => {
-
-  const app = createApp(CategoryForm)
   const element = document.getElementById('modal-form')
 
   if (!element || element.dataset.vueMounted === 'true') return
 
+  const app = createApp(CategoryForm)
+
   app.use(vuetify)
   app.mount(element)
+
   element.dataset.vueMounted = 'true'
 }
 
-document.addEventListener('DOMContentLoaded', mountModalForm)
 document.addEventListener('turbo:load', mountModalForm)

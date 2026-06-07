@@ -1,4 +1,3 @@
-<%= vite_javascript_tag 'modal_vue' %>
 <% content_for :description do %>登録されているカテゴリーの一覧ページです。カテゴリーの新規登録もできます。<% end %>   
 <div class="categories-wrapper">
   <div class="container">
@@ -11,7 +10,6 @@
           </div>
         <% end %>
       </div>
-      <%= link_to "カテゴリーを追加する", new_category_path, class: "btn btn-default category-button" %>
       <div class="edit-categories">  
         <h2>カテゴリーを編集する</h2>
         <% @categories.each do |category| %>
