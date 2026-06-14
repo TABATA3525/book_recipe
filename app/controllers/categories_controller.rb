@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
   
   def update
     @category = Category.find_by!(
-      id: categories_params[:category_id],
+      id: params[:category_id],
       user_id: current_user.id
     )
 
@@ -54,6 +54,6 @@ class CategoriesController < ApplicationController
   end
 
   def categories_params
-    params.permit(:category_name, :category_id)
+    params.permit(:category_name)
   end
 end
