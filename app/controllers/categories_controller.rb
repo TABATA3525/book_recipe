@@ -14,10 +14,20 @@ class CategoriesController < ApplicationController
   end
   
   def update
-    @category = Category.find_by!(id: categories_params[:category_id], user_id: current_user.id)
+    @category = Category.find_by!(
+      id: categories_params[:category_id],
+      user_id: current_user.id
+    )
+
     @category.category_name = categories_params[:category_name]
-    @category.save!
-    redirect_to categories_index_url
+
+    if @category.save
+      redirect_to categories_index_url
+    else
+      @defaultCategories = Category.where(user_id: nil)
+      @categories = Category.where(user_id: current_user.id).order(:user_id, :id)
+      render :index, status: :unprocessable_entity
+    end
   end
   
   def create
