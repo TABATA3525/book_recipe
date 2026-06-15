@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:edit, :destroy]
 
   def index
-    @defaultCategories = Category.where(user_id: nil)
+    @default_categories = Category.where(user_id: nil)
     @categories = Category.where(user_id: current_user.id).order(:user_id, :id)
   end
   
@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_index_url
     else
-      @defaultCategories = Category.where(user_id: nil)
+      @default_categories = Category.where(user_id: nil)
       @categories = Category.where(user_id: current_user.id).order(:user_id, :id)
       render :index, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_index_url
     else
-      @defaultCategories = Category.where(user_id: nil)
+      @default_categories = Category.where(user_id: nil)
       @categories = Category.where(user_id: current_user.id).order(:user_id, :id)
       render :index, status: :unprocessable_entity
     end
