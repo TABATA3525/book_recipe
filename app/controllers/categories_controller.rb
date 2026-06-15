@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   def index
     @default_categories = Category.where(user_id: nil)
-    @categories = Category.where(user_id: current_user.id).order(:user_id, :id)
+    @categories = current_user.categories.order(:id)
   end
   
   def new
@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
       redirect_to categories_index_url
     else
       @default_categories = Category.where(user_id: nil)
-      @categories = Category.where(user_id: current_user.id).order(:user_id, :id)
+      @categories = current_user.categories.order(:id)
       render :index, status: :unprocessable_entity
     end
   end
@@ -37,7 +37,7 @@ class CategoriesController < ApplicationController
       redirect_to categories_index_url
     else
       @default_categories = Category.where(user_id: nil)
-      @categories = Category.where(user_id: current_user.id).order(:user_id, :id)
+      @categories = current_user.categories.order(:id)
       render :index, status: :unprocessable_entity
     end
   end
