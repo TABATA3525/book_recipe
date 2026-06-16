@@ -10,15 +10,32 @@ const vuetify = createVuetify({
   directives,
 })
 
+let app = null
+
 const mountModalForm = () => {
-  const app = createApp(CategoryForm)
   const element = document.getElementById('modal-form')
+
   if (!element || element.dataset.vueMounted === 'true') return
+
+  app = createApp(CategoryForm)
 
   app.use(vuetify)
   app.mount(element)
+
   element.dataset.vueMounted = 'true'
 }
 
-document.addEventListener('DOMContentLoaded', mountModalForm)
 document.addEventListener('turbo:load', mountModalForm)
+
+document.addEventListener('turbo:before-cache', () => {
+  const element = document.getElementById('modal-form')
+
+  if (app) {
+    app.unmount()
+    app = null
+  }
+
+  if (element) {
+    delete element.dataset.vueMounted
+  }
+})

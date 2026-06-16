@@ -3,8 +3,8 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:edit, :destroy]
 
   def index
-    @defaultCategories = Category.where(user_id: nil)
-    @categories = Category.where(user_id: current_user.id).order(:user_id, :id)
+    @default_categories = Category.where(user_id: nil)
+    @categories = current_user.categories.order(:id)
   end
   
   def new
@@ -14,19 +14,32 @@ class CategoriesController < ApplicationController
   end
   
   def update
-    @category = Category.find_by!(id: categories_params[:category_id], user_id: current_user.id)
+    @category = Category.find_by!(
+      id: params[:category_id],
+      user_id: current_user.id
+    )
+
     @category.category_name = categories_params[:category_name]
-    @category.save!
-    redirect_to categories_index_url
+
+    if @category.save
+      redirect_to categories_index_url
+    else
+      @default_categories = Category.where(user_id: nil)
+      @categories = current_user.categories.order(:id)
+      render :index, status: :unprocessable_entity
+    end
   end
   
   def create
-    @category = Category.find_or_initialize_by(
-      user_id: current_user.id,
-      category_name: categories_params[:category_name]
-      )
-    @category.save!
-    redirect_to categories_index_url
+    @category = Category.new(categories_params)
+    @category.user_id = current_user.id
+    if @category.save
+      redirect_to categories_index_url
+    else
+      @default_categories = Category.where(user_id: nil)
+      @categories = current_user.categories.order(:id)
+      render :index, status: :unprocessable_entity
+    end
   end
   
   def destroy
@@ -41,6 +54,6 @@ class CategoriesController < ApplicationController
   end
 
   def categories_params
-    params.permit(:category_name, :category_id)
+    params.permit(:category_name)
   end
 end

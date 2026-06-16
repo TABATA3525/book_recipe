@@ -1,17 +1,19 @@
 <template>
   <div class="example-modal-window">
     <p>ボタンを押すとモーダルウィンドウが開きます</p>
-    <div @click="openModal">開く</div>
-
+    <button class="btn btn-default category-button" type="button" @click="openModal">カテゴリーを追加する</button>
     <!-- コンポーネント MyModal -->
     <Modal @close="closeModal" v-if="modal">
       <!-- default スロットコンテンツ -->
       <h2>カテゴリーを新規登録する</h2>
-        <input type="text" name="category_name">
+        <input type="text" name="category_name" v-model="categoryName">
       <!-- /default -->
       <!-- footer スロットコンテンツ -->
-      <template slot="footer">
+      <template #footer>
         <input type="submit" value="新規登録する">
+        <button type="button" @click="closeModal">
+          閉じる
+        </button>
       </template>
       <!-- /footer -->
     </Modal>
@@ -25,6 +27,7 @@ export default {
   data() {
     return {
       modal: false,
+      categoryName: '',
     }
   },
   methods: {
